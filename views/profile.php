@@ -23,6 +23,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
+    <link rel="stylesheet" href="/pfe/assets/css/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/pfe/assets/css/style.css">
     <style>
     .profile-header {
         background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
@@ -136,8 +140,50 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-section">
+                    <h5>À propos de TaskFlow</h5>
+                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité et simplifier votre organisation quotidienne.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/3ab2u.art"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/3ab2u.art"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/3ab2"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h5>Liens Rapides</h5>
+                    <ul class="footer-links">
+                        <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
+                        
+                        <li><a href="/pfe/FAQ.php">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h5>Contact</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope me-2"></i> elkarchabdo@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +212 789 123 456</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> C I T </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+    
+
+    <
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Charger les statistiques
@@ -190,5 +236,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         document.querySelector('.overdue-count').textContent = stats.overdue;
     }
     </script>
+    
 </body>
 </html>

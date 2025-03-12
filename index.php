@@ -102,32 +102,32 @@ require_once "config/database.php";
                     <h5>À propos de TaskFlow</h5>
                     <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité et simplifier votre organisation quotidienne.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/3ab2u.art"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/3ab2u.art"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/3ab2"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4 footer-section">
                     <h5>Liens Rapides</h5>
                     <ul class="footer-links">
                         <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
-                        <li><a href="#">Fonctionnalités</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        
+                        <li><a href="FAQ.php">FAQ</a></li>
                         <li><a href="#">Support</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 footer-section">
                     <h5>Contact</h5>
                     <ul class="footer-links">
-                        <li><i class="fas fa-envelope me-2"></i> contact@taskflow.com</li>
-                        <li><i class="fas fa-phone me-2"></i> +212 6XX-XXXXXX</li>
-                        <li><i class="fas fa-map-marker-alt me-2"></i> Maroc</li>
+                        <li><i class="fas fa-envelope me-2"></i> elkarchabdo@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +212 789 123 456</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> C I T </li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> TaskFlow. Tous droits réservés.</p>
+                <p>&copy; <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
             </div>
         </div>
     </footer>

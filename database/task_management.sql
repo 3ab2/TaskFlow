@@ -70,7 +70,7 @@ INSERT INTO users (username, email, password) VALUES
 ('user2', 'user2@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 
 -- Index pour améliorer les performances
-CREATE INDEX idx_tasks_user_id ON tasks(user_id);
-CREATE INDEX idx_messages_sender_receiver ON messages(sender_id, receiver_id);
-CREATE INDEX idx_tasks_status ON tasks(status);
-CREATE INDEX idx_tasks_deadline ON tasks(deadline);
+CREATE INDEX idx_tasks_user ON tasks(user_id);
+CREATE INDEX idx_messages_participants ON messages(sender_id, receiver_id);
+CREATE INDEX idx_tasks_status_tracking ON tasks(status);
+CREATE INDEX idx_tasks_deadline_tracking ON tasks(deadline);
