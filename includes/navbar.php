@@ -25,6 +25,17 @@ if (session_status() === PHP_SESSION_NONE) {
                         </a>
                     </li>
                 <?php endif; ?>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li class="nav-item">
+                  <a class="nav-link" href="/pfe/views/messages.php">
+                  <i class="fas fa-envelope"></i> Messagerie
+    </a>
+</li>
+
+                <?php endif; ?>
+            
+</li>
+
             </ul>
             <div class="d-flex align-items-center">
                 <button id="themeToggle" class="btn btn-outline-primary me-2" onclick="toggleTheme()">
