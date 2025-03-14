@@ -51,8 +51,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['error'] = "Erreur de préparation de la requête.";
     }
 
+    // Envoyer un email de notification à l'utilisateur
+    $to = $email;
+    $subject = "Confirmation de votre message";
+    $body = "Bonjour $name,\n\nVotre message a été envoyé avec succès à l'équipe de support.\n\nSujet: $subject\nMessage: $message\n\nMerci de nous avoir contactés.";
+    $headers = "From: support@taskflow.com";
+
+    if (mail($to, $subject, $body, $headers)) {
+        $_SESSION['success'] = "Votre message a été envoyé avec succès. Un email de confirmation a été envoyé.";
+    } else {
+        $_SESSION['error'] = "Erreur lors de l'envoi de l'email de confirmation.";
+    }
+
     // Fermer la connexion à la base de données
     $conn = null;
+
 
     // Rediriger vers la page de support avec un message
     header("Location: support.php");
