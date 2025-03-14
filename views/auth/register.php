@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($result['success']) {
         $success = $result['message'];
-        header('refresh:2;url=login.php');
+        header('refresh:3;url=login.php');
     } else {
         $error = implode('<br>', $result['errors']);
     }
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <div class="form-text">
-                        Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre.
+                        Le mot de passe doit contenir au moins 8 caractères.
                     </div>
                 </div>
 

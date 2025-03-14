@@ -26,6 +26,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/dashboard.css">
+ 
 </head>
 <body>
     <?php include "../includes/navbar.php"; ?>
@@ -55,16 +56,42 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
             </div>
         </div>
 
-        <!-- Bouton Nouvelle tâche -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Mes tâches</h2>
-            <button id="addTaskBtn" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Nouvelle tâche
-            </button>
+    <div class="d-flex justify-content-between align-items-center mb-4 mx-3" style=" border-radius: 10px; padding: 5px; z-index: 10;">
+    <h2> Mes tâches</h2>
+    <button id="addTaskBtn" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Nouvelle tâche
+    </button>
+</div>
+
+
+
+        
+
+
+     
+        
+     <div class="task-board">
+            <div class="task-column">
+                <h5><i class="fas fa-list" style="color:red;"></i> &nbsp; À faire</h5>
+             
+            </div>
+            
+            <div class="task-column" >
+                <h5><i class="fas fa-spinner" style="color:rgb(255, 225, 0);"></i>&nbsp; En cours</h5>
+               
+            </div>
+            
+            <div class="task-column">
+                <h5><i class="fas fa-check" style="color:green;"></i>&nbsp; Terminées</h5>
+               
+            </div>
         </div>
+    </div>
+
+     
 
         <!-- Tableau Kanban -->
-        <div class="task-board">
+       <div class="task-board" style="padding-top: 20px;">
             <div class="task-column" data-status="to_do" id="todoTasks">
                 <h5><i class="fas fa-list"></i> À faire</h5>
                 <?php foreach ($tasks as $task): ?>
@@ -147,6 +174,12 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
             </div>
         </div>
     </div>
+
+
+
+
+
+
 
     <!-- Modal pour ajouter/modifier une tâche -->
     <div class="modal fade" id="taskModal" tabindex="-1">

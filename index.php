@@ -15,6 +15,7 @@ require_once "config/database.php";
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
+    
 
     <!-- Hero Section -->
     <section class="hero">
@@ -26,7 +27,7 @@ require_once "config/database.php";
                     <?php if (!isset($_SESSION['user_id'])): ?>
                         <div class="d-flex gap-3">
                             <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg">Commencer gratuitement</a>
-                            <a href="/pfe/views/auth/login.php" class="btn btn-outline-light btn-lg">Se connecter</a>
+                            <a href="/pfe/views/auth/login.php" class="btn btn-outline-light btn-lg">Aller se connecter</a>
                         </div>
                     <?php else: ?>
                         <a href="/pfe/views/dashboard.php" class="btn btn-light btn-lg">Accéder au tableau de bord</a>
@@ -48,7 +49,7 @@ require_once "config/database.php";
                         <div class="feature-icon purple">
                             <i class="fas fa-tasks"></i>
                         </div>
-                        <h3>Organisation Kanban</h3>
+                        <h3>Organisation des taches</h3>
                         <p>Visualisez et gérez vos tâches avec une interface Kanban intuitive et flexible.</p>
                     </div>
                 </div>

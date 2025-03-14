@@ -20,6 +20,23 @@ require_once "config/database.php";
     <?php include 'includes/navbar.php'; ?>
 
     <section class="support container py-5">
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                <?php
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
+                ?>
+            </div>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger">
+                <?php
+                echo $_SESSION['error'];
+                unset($_SESSION['error']);
+                ?>
+            </div>
+        <?php endif; ?>
+
         <h1 class="text-center mb-4">Centre de Support</h1>
         <p class="text-center">Besoin d'aide ? Contactez-nous via le formulaire ci-dessous ou consultez notre <a href="/pfe/FAQ.php">FAQ</a>.</p>
         
