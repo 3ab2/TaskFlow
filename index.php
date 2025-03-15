@@ -4,6 +4,7 @@ require_once "config/database.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,10 @@ require_once "config/database.php";
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
     <link rel="stylesheet" href="/pfe/assets/css/home.css">
 </head>
+
 <body>
     <?php include 'includes/navbar.php'; ?>
-    
+
 
     <!-- Hero Section -->
     <section class="hero">
@@ -23,7 +25,8 @@ require_once "config/database.php";
             <div class="row align-items-center">
                 <div class="col-lg-6 animate-fadeInUp">
                     <h1>Gérez vos tâches efficacement avec TaskFlow</h1>
-                    <p>Une solution moderne et intuitive pour organiser votre travail, suivre vos progrès et atteindre vos objectifs.</p>
+                    <p>Une solution moderne et intuitive pour organiser votre travail, suivre vos progrès et atteindre
+                        vos objectifs.</p>
                     <?php if (!isset($_SESSION['user_id'])): ?>
                         <div class="d-flex gap-3">
                             <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg">Commencer gratuitement</a>
@@ -88,7 +91,8 @@ require_once "config/database.php";
     <section class="cta">
         <div class="container">
             <h2>Prêt à améliorer votre productivité ?</h2>
-            <p>Rejoignez des milliers d'utilisateurs qui font confiance à TaskFlow pour gérer leurs tâches quotidiennes.</p>
+            <p>Rejoignez des milliers d'utilisateurs qui font confiance à TaskFlow pour gérer leurs tâches quotidiennes.
+            </p>
             <?php if (!isset($_SESSION['user_id'])): ?>
                 <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg">Commencer maintenant</a>
             <?php endif; ?>
@@ -101,11 +105,13 @@ require_once "config/database.php";
             <div class="row">
                 <div class="col-md-4 footer-section">
                     <h5>À propos de TaskFlow</h5>
-                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité et simplifier votre organisation quotidienne.</p>
+                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité
+                        et simplifier votre organisation quotidienne.</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/3ab2u.art"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/3ab2u.art"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i
+                                class="fab fa-youtube"></i></a>
                         <a href="https://github.com/3ab2"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
@@ -113,7 +119,7 @@ require_once "config/database.php";
                     <h5>Liens Rapides</h5>
                     <ul class="footer-links">
                         <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
-                        
+
                         <li><a href="FAQ.php">FAQ</a></li>
                         <li><a href="#">Support</a></li>
                     </ul>
@@ -135,4 +141,5 @@ require_once "config/database.php";
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

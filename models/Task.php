@@ -1,5 +1,6 @@
 <?php
-class Task {
+class Task
+{
     private $conn;
     private $table = "tasks";
 
@@ -11,11 +12,13 @@ class Task {
     public $priority;
     public $deadline;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
-    public function create() {
+    public function create()
+    {
         // Vérifier le nombre de tâches en cours
         $query = "SELECT COUNT(*) as count FROM " . $this->table . " 
                  WHERE user_id = ? AND status = 'in_progress'";
@@ -23,7 +26,7 @@ class Task {
         $stmt->execute([$this->user_id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($row['count'] >= 3 && $this->status == 'in_progress') {
+        if ($row['count'] >= 10 && $this->status == 'in_progress') {
             return ['success' => false, 'message' => 'Vous ne pouvez pas avoir plus de 3 tâches en cours'];
         }
 
@@ -42,14 +45,15 @@ class Task {
             $this->deadline
         ]);
 
-        if($stmt->rowCount() > 0) {
+        if ($stmt->rowCount() > 0) {
             $this->id = $this->conn->lastInsertId();
             return ['success' => true, 'id' => $this->id];
         }
         return ['success' => false, 'message' => 'Erreur lors de la création de la tâche'];
     }
 
-    public function update() {
+    public function update()
+    {
         // Vérifier le nombre de tâches en cours si on change le statut à 'in_progress'
         if ($this->status == 'in_progress') {
             $query = "SELECT COUNT(*) as count FROM " . $this->table . " 
@@ -81,13 +85,15 @@ class Task {
         ]);
     }
 
-    public function delete() {
+    public function delete()
+    {
         $query = "DELETE FROM " . $this->table . " WHERE id = ? AND user_id = ?";
         $stmt = $this->conn->prepare($query);
         return $stmt->execute([$this->id, $this->user_id]);
     }
 
-    public function read() {
+    public function read()
+    {
         $query = "SELECT t.*, 
                     (SELECT COUNT(*) FROM subtasks s WHERE s.task_id = t.id) as subtasks_count,
                     (SELECT COUNT(*) FROM subtasks s WHERE s.task_id = t.id AND s.completed = 1) as completed_subtasks
@@ -111,14 +117,16 @@ class Task {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function readOne() {
+    public function readOne()
+    {
         $query = "SELECT * FROM " . $this->table . " WHERE id = ? AND user_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$this->id, $this->user_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getTasksStats() {
+    public function getTasksStats()
+    {
         $query = "SELECT 
                     COUNT(*) as total_tasks,
                     SUM(CASE WHEN status = 'to_do' THEN 1 ELSE 0 END) as todo_count,
@@ -126,7 +134,7 @@ class Task {
                     SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed_count
                  FROM " . $this->table . "
                  WHERE user_id = ?";
-        
+
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$this->user_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);

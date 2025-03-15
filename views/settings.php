@@ -13,6 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,12 +26,13 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
 </head>
+
 <body>
     <?php include '../includes/navbar.php'; ?>
 
     <div class="container py-5">
         <h2 class="mb-4">Paramètres</h2>
-        
+
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group">
@@ -48,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
                     </a>
                 </div>
             </div>
-            
+
             <div class="col-md-9">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="general">
@@ -77,7 +79,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="tab-pane fade" id="appearance">
                         <div class="card">
                             <div class="card-body">
@@ -103,7 +105,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="tab-pane fade" id="language">
                         <div class="card">
                             <div class="card-body">
@@ -122,7 +124,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="tab-pane fade" id="notifications">
                         <div class="card">
                             <div class="card-body">
@@ -153,17 +155,19 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
     </div>
-     <!-- Footer -->
-     <footer>
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-4 footer-section">
                     <h5>À propos de TaskFlow</h5>
-                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité et simplifier votre organisation quotidienne.</p>
+                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité
+                        et simplifier votre organisation quotidienne.</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/3ab2u.art"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/3ab2u.art"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i
+                                class="fab fa-youtube"></i></a>
                         <a href="https://github.com/3ab2"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
@@ -171,7 +175,7 @@ if (!isset($_SESSION['user_id'])) {
                     <h5>Liens Rapides</h5>
                     <ul class="footer-links">
                         <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
-                        
+
                         <li><a href="/pfe/FAQ.php">FAQ</a></li>
                         <li><a href="#">Support</a></li>
                     </ul>
@@ -194,37 +198,38 @@ if (!isset($_SESSION['user_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Charger les paramètres sauvegardés
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.getElementById('themeSelect').value = savedTheme;
-        document.body.setAttribute('data-theme', savedTheme);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Charger les paramètres sauvegardés
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.getElementById('themeSelect').value = savedTheme;
+            document.body.setAttribute('data-theme', savedTheme);
 
-        // Gérer le changement de thème
-        document.getElementById('themeSelect').addEventListener('change', function(e) {
-            const theme = e.target.value;
-            document.body.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        });
+            // Gérer le changement de thème
+            document.getElementById('themeSelect').addEventListener('change', function (e) {
+                const theme = e.target.value;
+                document.body.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            });
 
-        // Gérer la soumission des formulaires
-        const forms = document.querySelectorAll('form');
-        forms.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-                
-                // Sauvegarder les paramètres
-                Object.entries(data).forEach(([key, value]) => {
-                    localStorage.setItem(key, value);
+            // Gérer la soumission des formulaires
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+
+                    // Sauvegarder les paramètres
+                    Object.entries(data).forEach(([key, value]) => {
+                        localStorage.setItem(key, value);
+                    });
+
+                    // Afficher un message de succès
+                    alert('Paramètres sauvegardés avec succès !');
                 });
-
-                // Afficher un message de succès
-                alert('Paramètres sauvegardés avec succès !');
             });
         });
-    });
     </script>
 </body>
+
 </html>

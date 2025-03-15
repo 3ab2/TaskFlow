@@ -7,6 +7,7 @@ if (isset($_SESSION['user_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,31 +16,35 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
     <style>
-    .login-container {
-        min-height: calc(100vh - 200px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem 0;
-    }
-    .login-card {
-        max-width: 400px;
-        width: 100%;
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 4px 6px var(--shadow);
-    }
-    .login-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .login-header i {
-        font-size: 3rem;
-        color: #4f46e5;
-        margin-bottom: 1rem;
-    }
+        .login-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .login-card {
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header i {
+            font-size: 3rem;
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
+
 <body>
     <?php include '../../includes/navbar.php'; ?>
 
@@ -50,15 +55,17 @@ if (isset($_SESSION['user_id'])) {
                 <h2>Connexion</h2>
                 <p class="text-muted">Connectez-vous à votre compte TaskFlow</p>
             </div>
-            
+
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="alert alert-danger">
-                    <?php 
+                    <?php
                     echo $_SESSION['error'];
                     unset($_SESSION['error']);
                     ?>
                 </div>
             <?php endif; ?>
+
+            </form>
 
             <form action="/pfe/controllers/process_login.php" method="POST">
                 <div class="mb-3">
@@ -91,6 +98,12 @@ if (isset($_SESSION['user_id'])) {
                 </button>
 
                 <div class="text-center">
+                    <p class="mb-0">
+                        <a href="reset_password.php" class="text-primary">Mot de passe oublié ?</a>
+                    </p>
+                </div><br>
+
+                <div class="text-center">
                     <p class="mb-0">Vous n'avez pas de compte ?</p>
                     <a href="register.php" class="text-primary">Créer un compte</a>
                 </div>
@@ -100,4 +113,5 @@ if (isset($_SESSION['user_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -1,15 +1,18 @@
 <?php
-class TaskController {
+class TaskController
+{
     private $db;
     private $table = 'tasks';
 
-    public function __construct() {
+    public function __construct()
+    {
         require_once __DIR__ . "/../config/database.php";
         $database = new Database();
         $this->db = $database->getConnection();
     }
 
-    public function getTasks() {
+    public function getTasks()
+    {
         try {
             $query = "SELECT * FROM {$this->table} WHERE user_id = ? ORDER BY 
                 CASE status
@@ -23,10 +26,10 @@ class TaskController {
                     WHEN 'low' THEN 3
                 END,
                 deadline ASC";
-            
+
             $stmt = $this->db->prepare($query);
             $stmt->execute([$_SESSION['user_id']]);
-            
+
             return [
                 'success' => true,
                 'data' => $stmt->fetchAll(PDO::FETCH_ASSOC)
@@ -39,14 +42,15 @@ class TaskController {
         }
     }
 
-    public function getTask($id) {
+    public function getTask($id)
+    {
         try {
             $query = "SELECT * FROM {$this->table} WHERE id = ? AND user_id = ?";
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id, $_SESSION['user_id']]);
-            
+
             $task = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if ($task) {
                 return [
                     'success' => true,
@@ -66,14 +70,15 @@ class TaskController {
         }
     }
 
-    public function createTask($data) {
+    public function createTask($data)
+    {
         try {
             // Vérifier si l'utilisateur a déjà 3 tâches en cours
             if ($data['status'] === 'in_progress') {
                 $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM {$this->table} WHERE user_id = ? AND status = 'in_progress'");
                 $stmt->execute([$_SESSION['user_id']]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                
+
                 if ($result['count'] >= 3) {
                     return [
                         'success' => false,
@@ -84,7 +89,7 @@ class TaskController {
 
             $query = "INSERT INTO {$this->table} (title, description, priority, status, deadline, user_id) 
                      VALUES (?, ?, ?, ?, ?, ?)";
-            
+
             $stmt = $this->db->prepare($query);
             $success = $stmt->execute([
                 $data['title'],
@@ -94,7 +99,7 @@ class TaskController {
                 $data['deadline'],
                 $_SESSION['user_id']
             ]);
-            
+
             if ($success) {
                 return [
                     'success' => true,
@@ -115,13 +120,14 @@ class TaskController {
         }
     }
 
-    public function updateTask($id, $data) {
+    public function updateTask($id, $data)
+    {
         try {
             // Vérifier si la tâche appartient à l'utilisateur
             $stmt = $this->db->prepare("SELECT status FROM {$this->table} WHERE id = ? AND user_id = ?");
             $stmt->execute([$id, $_SESSION['user_id']]);
             $task = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             if (!$task) {
                 return [
                     'success' => false,
@@ -134,7 +140,7 @@ class TaskController {
                 $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM {$this->table} WHERE user_id = ? AND status = 'in_progress'");
                 $stmt->execute([$_SESSION['user_id']]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                
+
                 if ($result['count'] >= 3) {
                     return [
                         'success' => false,
@@ -146,7 +152,7 @@ class TaskController {
             // Construire la requête de mise à jour
             $updateFields = [];
             $params = [];
-            
+
             if (isset($data['title'])) {
                 $updateFields[] = 'title = ?';
                 $params[] = $data['title'];
@@ -178,12 +184,12 @@ class TaskController {
             $params[] = $id;
             $params[] = $_SESSION['user_id'];
 
-            $query = "UPDATE {$this->table} SET " . implode(', ', $updateFields) . 
-                    " WHERE id = ? AND user_id = ?";
-            
+            $query = "UPDATE {$this->table} SET " . implode(', ', $updateFields) .
+                " WHERE id = ? AND user_id = ?";
+
             $stmt = $this->db->prepare($query);
             $success = $stmt->execute($params);
-            
+
             return [
                 'success' => $success,
                 'message' => $success ? 'Tâche mise à jour avec succès' : 'Erreur lors de la mise à jour'
@@ -196,12 +202,13 @@ class TaskController {
         }
     }
 
-    public function deleteTask($id) {
+    public function deleteTask($id)
+    {
         try {
             $query = "DELETE FROM {$this->table} WHERE id = ? AND user_id = ?";
             $stmt = $this->db->prepare($query);
             $success = $stmt->execute([$id, $_SESSION['user_id']]);
-            
+
             return [
                 'success' => $success,
                 'message' => $success ? 'Tâche supprimée avec succès' : 'Erreur lors de la suppression'
@@ -214,7 +221,8 @@ class TaskController {
         }
     }
 
-    public function getTaskStats() {
+    public function getTaskStats()
+    {
         try {
             $stats = [
                 'total' => 0,
@@ -233,7 +241,7 @@ class TaskController {
                 SUM(CASE WHEN deadline < CURRENT_DATE AND status != 'completed' THEN 1 ELSE 0 END) as overdue
                 FROM {$this->table} 
                 WHERE user_id = ?");
-            
+
             $stmt->execute([$_SESSION['user_id']]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 

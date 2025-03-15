@@ -47,9 +47,17 @@ body {
     margin-right: 8px;
 }
 
-.status-available { background-color: #28a745; }
-.status-busy { background-color: #dc3545; }
-.status-away { background-color: #ffc107; }
+.status-available {
+    background-color: #28a745;
+}
+
+.status-busy {
+    background-color: #dc3545;
+}
+
+.status-away {
+    background-color: #ffc107;
+}
 
 /* Tableau de bord */
 .task-board {
@@ -97,9 +105,17 @@ body {
 }
 
 /* Priorités */
-.priority-high { border-left: 4px solid #dc3545; }
-.priority-medium { border-left: 4px solid #ffc107; }
-.priority-low { border-left: 4px solid #28a745; }
+.priority-high {
+    border-left: 4px solid #dc3545;
+}
+
+.priority-medium {
+    border-left: 4px solid #ffc107;
+}
+
+.priority-low {
+    border-left: 4px solid #28a745;
+}
 
 /* Statistiques */
 .stats-container {
@@ -138,13 +154,15 @@ body {
 }
 
 /* Formulaires */
-.form-control, .form-select {
+.form-control,
+.form-select {
     background-color: var(--card-bg);
     border-color: var(--border-color);
     color: var(--text-color);
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     background-color: var(--card-bg);
     border-color: #0d6efd;
     color: var(--text-color);

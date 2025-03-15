@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['password'],
         $_POST['confirm_password']
     );
-    
+
     if ($result['success']) {
         $success = $result['message'];
         header('refresh:3;url=login.php');
@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,31 +37,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
     <style>
-    .register-container {
-        min-height: calc(100vh - 200px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem 0;
-    }
-    .register-card {
-        max-width: 500px;
-        width: 100%;
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 4px 6px var(--shadow);
-    }
-    .register-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .register-header i {
-        font-size: 3rem;
-        color: #4f46e5;
-        margin-bottom: 1rem;
-    }
+        .register-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .register-card {
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .register-header i {
+            font-size: 3rem;
+            color: #4f46e5;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
+
 <body>
     <?php include '../../includes/navbar.php'; ?>
 
@@ -124,7 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <span class="input-group-text">
                             <i class="fas fa-lock"></i>
                         </span>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                            required>
                     </div>
                 </div>
 
@@ -142,4 +148,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

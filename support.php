@@ -4,18 +4,20 @@ require_once "config/database.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support - TaskFlow</title>
-   
-   
-    
+
+
+
     <link rel="stylesheet" href="/pfe/assets/css/home.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
 </head>
+
 <body>
     <?php include 'includes/navbar.php'; ?>
 
@@ -38,8 +40,9 @@ require_once "config/database.php";
         <?php endif; ?>
 
         <h1 class="text-center mb-4">Centre de Support</h1>
-        <p class="text-center">Besoin d'aide ? Contactez-nous via le formulaire ci-dessous ou consultez notre <a href="/pfe/FAQ.php">FAQ</a>.</p>
-        
+        <p class="text-center">Besoin d'aide ? Contactez-nous via le formulaire ci-dessous ou consultez notre <a
+                href="/pfe/FAQ.php">FAQ</a>.</p>
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card p-4">
@@ -67,17 +70,19 @@ require_once "config/database.php";
         </div>
     </section>
 
-      <!-- Footer -->
-      <footer>
+    <!-- Footer -->
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-4 footer-section">
                     <h5>À propos de TaskFlow</h5>
-                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité et simplifier votre organisation quotidienne.</p>
+                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité
+                        et simplifier votre organisation quotidienne.</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/3ab2u.art"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://www.instagram.com/3ab2u.art"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i
+                                class="fab fa-youtube"></i></a>
                         <a href="https://github.com/3ab2"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
@@ -85,7 +90,7 @@ require_once "config/database.php";
                     <h5>Liens Rapides</h5>
                     <ul class="footer-links">
                         <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
-                        
+
                         <li><a href="/pfe/FAQ.php">FAQ</a></li>
                         <li><a href="/pfe/support.php">Support</a></li>
                     </ul>
@@ -107,4 +112,5 @@ require_once "config/database.php";
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
