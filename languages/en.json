@@ -1,0 +1,14 @@
+{
+    "settings": "Settings",
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "notifications": "Notifications",
+    "save": "Save",
+    "timezone": "Timezone",
+    "date_format": "Date Format",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "auto": "Automatic"
+}

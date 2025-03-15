@@ -14,14 +14,42 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Récupérer les messages depuis la base de données
-$query = "SELECT messages.*, users.username 
-          FROM messages 
-          JOIN users ON messages.user_id = users.id 
-          ORDER BY messages.created_at DESC";
+// Vérification si l'ID du message est fourni
+if (!isset($_GET['id'])) {
+    header("Location: /pfe/views/messages.php");
+    exit();
+}
+
+$message_id = $_GET['id'];
+
+// Récupérer le message depuis la base de données
+$query = "SELECT * FROM messages WHERE id = :id AND user_id = :user_id";
 $stmt = $pdo->prepare($query);
+$stmt->bindParam(':id', $message_id);
+$stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
-$messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$message = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Vérification si le message existe
+if (!$message) {
+    header("Location: /pfe/views/messages.php");
+    exit();
+}
+
+// Traitement du formulaire de mise à jour
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $content = $_POST['content'];
+
+    // Mettre à jour le message dans la base de données
+    $update_query = "UPDATE messages SET content = :content WHERE id = :id";
+    $update_stmt = $pdo->prepare($update_query);
+    $update_stmt->bindParam(':content', $content);
+    $update_stmt->bindParam(':id', $message_id);
+    $update_stmt->execute();
+
+    header("Location: /pfe/views/messages.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,67 +57,30 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messagerie - TaskFlow</title>
-    
+    <title>Modifier le Message - TaskFlow</title>
     <link rel="stylesheet" href="/pfe/assets/css/home.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
-    <style>
-        .message-actions {
-            display: none;
-        }
-        .alert:hover .message-actions {
-            display: block;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="container mt-4">
-        <h2 class="text-center mb-4"><i class="fas fa-comments"></i> Messagerie</h2>
+    <div class="container mt-4">    
 
-        <div class="card">
-            <div class="card-body">
-                <!-- Zone d'affichage des messages -->
-                <div class="chat-box p-3" style="max-height: 400px; overflow-y: auto;">
-                    <?php foreach ($messages as $message): ?>
-                        <div class="d-flex <?php echo ($message['user_id'] == $user_id) ? 'justify-content-end' : 'justify-content-start'; ?>">
-                            <div class="alert <?php echo ($message['user_id'] == $user_id) ? 'alert-primary' : 'alert-secondary'; ?> w-75">
-                                <small class="text-muted"><?= htmlspecialchars($message['username']); ?> - <?= $message['created_at']; ?></small>
-                                <p class="mb-0"><?= nl2br(htmlspecialchars($message['content'])); ?></p>
-                                <div class="message-actions" style="position: relative;">
-                                   <?php if ($message['user_id'] == $user_id): ?>
-                                       <div style="position: absolute; bottom: 25px; right: 0;">
-                                           <a href="edit_message.php?id=<?= $message['id']; ?>" class="btn btn-sm"><i class="fas fa-edit"></i></a>
-                                       </div>
-                                       <div style="position: absolute; bottom: -5px; right: 0;">
-                                           <a href="delete_message.php?id=<?= $message['id']; ?>" class="btn btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                       </div>
-                                   <?php endif; ?>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-
-                <!-- Formulaire d'envoi -->
-                <form action="send_message.php" method="POST" class="mt-3">
-                    <div class="input-group">
-                        <input type="text" name="message" class="form-control" placeholder="Écrire un message..." required>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </form>
+       <h4 class="text-center"><i class="fas fa-edit me-2"></i> Vous pouvez modifier votre Message ici</h4>
+        <form action="" method="POST">
+            <div class="mb-3">
+                <label for="content" class="form-label">Contenu du Message</label>
+                <textarea id="content" name="content" class="form-control" rows="4" required><?= htmlspecialchars($message['content']); ?></textarea>
             </div>
-        </div>
+            <button type="submit" class="btn btn-primary">Mettre à Jour</button>
+            <a href="/pfe/views/messages.php" class="btn btn-secondary">Annuler</a>
+        </form>
     </div>
-    <!-- Footer -->
-    <footer style="margin-top: 20px;">
-    
+       <!-- Footer -->
+          
+       <footer style="margin-top: 40px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 footer-section">
@@ -125,7 +116,6 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
