@@ -134,7 +134,7 @@ require_once "config/database.php";
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
+                <p>&copy; 2021 - <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
             </div>
         </div>
     </footer>

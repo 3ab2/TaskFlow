@@ -3,7 +3,104 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg fixed-top" >
+    <div class="container">
+        <a class="navbar-brand" href="/pfe/index.php">
+            <i class="fas fa-tasks"></i> TaskFlow
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/pfe/index.php">
+                        <i class="fas fa-home"></i> Accueil
+                    </a>
+                </li>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pfe/views/dashboard.php">
+                            <i class="fas fa-columns"></i> Tableau de bord
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li class="nav-item">
+                  <a class="nav-link" href="/pfe/views/messages.php">
+                  <i class="fas fa-envelope"></i> Messagerie
+    </a>
+</li>
+
+                <?php endif; ?>
+            
+</li>
+
+            </ul>
+            <div class="d-flex align-items-center">
+                <button id="themeToggle" class="btn btn-outline-primary me-2" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    <a href="/pfe/views/auth/login.php" class="btn btn-outline-primary me-2">
+                        <i class="fas fa-sign-in-alt"></i> Connexion
+                    </a>
+                    <a href="/pfe/views/auth/register.php" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Inscription
+                    </a>
+                <?php else: ?>
+                    <div class="dropdown me-2">
+                        <button class="btn btn-outline-primary" type="button" id="statusDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-circle user-status"></i>
+                            <span class="status-text">Disponible</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item status-option" href="#" data-status="available">
+                                    <i class="fas fa-circle text-success"></i> Disponible
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item status-option" href="#" data-status="busy">
+                                    <i class="fas fa-circle text-danger"></i> Occupé
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item status-option" href="#" data-status="away">
+                                    <i class="fas fa-circle text-warning"></i> Absent
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                            <i class="fas fa-user"></i>
+                            <?php echo htmlspecialchars($_SESSION['username'] ?? 'Mon Compte'); ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="/pfe/views/profile.php">
+                                    <i class="fas fa-user-circle me-2"></i> Profil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/pfe/views/settings.php">
+                                    <i class="fas fa-cog me-2"></i> Paramètres
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="/pfe/controllers/logout.php">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</nav>>
     <div class="container">
         <a class="navbar-brand" href="/pfe/index.php">
             <i class="fas fa-tasks"></i> TaskFlow
