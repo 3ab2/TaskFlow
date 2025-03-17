@@ -27,8 +27,15 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
+                        <a class="nav-link" href="/pfe/views/statistiques.php">
+                        <i class="fas fa-chart-line "></i></i> Statistiques
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li class="nav-item">
                   <a class="nav-link" href="/pfe/views/messages.php">
-                  <i class="fas fa-envelope"></i> Messagerie
+                  <i class="fas fa-comments"></i> Messagerie
     </a>
 </li>
 

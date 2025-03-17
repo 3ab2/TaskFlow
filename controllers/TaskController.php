@@ -79,10 +79,10 @@ class TaskController
                 $stmt->execute([$_SESSION['user_id']]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if ($result['count'] >= 3) {
+                if ($result['count'] >= 10) {
                     return [
                         'success' => false,
-                        'message' => 'Vous ne pouvez pas avoir plus de 3 tâches en cours'
+                        'message' => 'Vous ne pouvez pas avoir plus de 10 tâches en cours'
                     ];
                 }
             }
@@ -141,10 +141,10 @@ class TaskController
                 $stmt->execute([$_SESSION['user_id']]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if ($result['count'] >= 3) {
+                if ($result['count'] >= 1000000000000) {
                     return [
                         'success' => false,
-                        'message' => 'Vous ne pouvez pas avoir plus de 3 tâches en cours'
+                        'message' => 'Vous ne pouvez pas avoir plus de 100000000000 tâches en cours'
                     ];
                 }
             }
