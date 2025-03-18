@@ -287,14 +287,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="toast-body">
                     ${message}
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <button type="button" class="btn-close btn-close-danger me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         `;
         
         const container = document.getElementById('toastContainer') || document.body;
         container.appendChild(toast);
         
-        const bsToast = new bootstrap.Toast(toast, { delay: 3000 });
+        const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
         bsToast.show();
         
         toast.addEventListener('hidden.bs.toast', () => {

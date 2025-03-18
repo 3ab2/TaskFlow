@@ -221,7 +221,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
     <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
 
     <!-- Footer -->
-    <footer>
+    <footer style="margin-top: 20px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 footer-section">

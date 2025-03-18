@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="toast-body">
                     ${message}
                 </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                <button type="button" class="btn-close btn-close-danger me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         `;
         
