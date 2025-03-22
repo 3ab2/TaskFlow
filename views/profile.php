@@ -64,7 +64,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     <div class="profile-header">
         <div class="container text-center">
-            <img src="<?php echo $user['avatar_url'] ?? 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user['email']))) . '?d=mp'; ?>"
+            <img src="../assets/images/profil.png"
                 alt="Photo de profil" class="profile-picture mb-3">
             <h2><?php echo htmlspecialchars($user['username']); ?></h2>
             <p class="mb-0"><?php echo htmlspecialchars($user['email']); ?></p>

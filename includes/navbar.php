@@ -3,10 +3,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-<nav class="navbar navbar-expand-lg fixed-top" >
+<nav class="navbar navbar-expand-lg fixed-top d-inline-block align-top" >
     <div class="container">
         <a class="navbar-brand" href="/pfe/index.php">
-            <i class="fas fa-tasks"></i> TaskFlow
+            <img src="/pfe/assets/images/poudre.png" width="35" height="35" class="d-inline-block align-top" alt="Logo de TaskFlow">
+            <strong><em>TASKFLOW</em></strong>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>

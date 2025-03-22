@@ -18,7 +18,6 @@ require_once "config/database.php";
 <body>
     <?php include 'includes/navbar.php'; ?>
 
-
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
