@@ -3,6 +3,12 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     header('Location: /pfe/views/dashboard.php');
     exit();
+
+}
+
+if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') {
+    header('Location: /pfe/admin/dashboard.php');
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -48,7 +54,7 @@ if (isset($_SESSION['user_id'])) {
 <body>
     <?php include '../../includes/navbar.php'; ?>
 
-    <div class="login-container">
+    <div class="login-container mt-5">
         <div class="card login-card">
             <div class="login-header">
                 <i class="fas fa-user-circle"></i>

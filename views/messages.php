@@ -45,6 +45,89 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             display: block;
             cursor: pointer;
         }
+
+        /* Nouveau style moderne pour les messages */
+        .chat-box {
+            background: rgba(133, 207, 170, 0.35);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .alert {
+            border:none;
+            border-bottom: 2px solid rgb(22, 198, 60);
+            border-right: 1px solid rgb(22, 198, 60);
+            border-radius: 30px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            max-width: 40%;
+        }
+
+        .alert:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .alert-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg,rgb(108, 125, 120),rgb(154, 217, 199));
+            color: white;
+        }
+
+        .message-actions {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .alert:hover .message-actions {
+            opacity: 1;
+        }
+
+        .message-actions .btn {
+            color: white;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            height: 30px;
+            width: 30px;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .message-actions .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .text-muted {
+            font-size: 0.8rem;
+            opacity: 0.8;
+           
+        }
+
+        .input-group {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .input-group input {
+            border: none;
+            padding: 15px 20px;
+        }
+
+        .input-group .btn {
+            border-radius: 0 25px 25px 0;
+            padding: 15px 25px;
+        }
     </style>
 </head>
 
@@ -64,19 +147,21 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div
                             class="d-flex <?php echo ($message['user_id'] == $user_id) ? 'justify-content-end' : 'justify-content-start'; ?>">
                             <div
-                                class="alert <?php echo ($message['user_id'] == $user_id) ? 'alert-primary' : 'alert-secondary'; ?> w-75">
+                                class="alert <?php echo ($message['user_id'] == $user_id) ? 'alert-primary' : 'alert-info'; ?> w-75 ">
+                                <i class="fas fa-user-circle me-2"></i>
                                 <small class="text-muted"
                                     style="color: <?= '#' . substr(md5($message['username']), 0, 6); ?>; font-weight: bold;"><?= htmlspecialchars($message['username']); ?>
-                                    - <?= $message['created_at']; ?></small>
+                                    
+                                   </small> <i style="color: rgb(0, 0, 0, 0.5); font-size: 0.7rem;"> - Is sent this message at <?= $message['created_at']; ?></i>
 
                                 <p class="mb-0"><?= nl2br(htmlspecialchars($message['content'])); ?></p>
                                 <div class="message-actions" style="position: relative;">
                                     <?php if ($message['user_id'] == $user_id): ?>
-                                        <div style="position: absolute; bottom: 25px; right: 0;">
+                                        <div style="position: absolute; bottom: 24px; right: 0;">
                                             <a href="edit_message.php?id=<?= $message['id']; ?>" class="btn btn-sm"><i
                                                     class="fas fa-edit"></i></a>
                                         </div>
-                                        <div style="position: absolute; bottom: -5px; right: 0;">
+                                        <div style="position: absolute; bottom: -8px; right: 0;">
                                             <a href="delete_message.php?id=<?= $message['id']; ?>" class="btn btn-sm"><i
                                                     class="fas fa-trash-alt"></i></a>
                                         </div>

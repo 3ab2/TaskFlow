@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .register-card {
-            max-width: 500px;
+            max-width: 400px;
             width: 100%;
             padding: 2rem;
             border-radius: 1rem;
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include '../../includes/navbar.php'; ?>
 
-    <div class="register-container">
+    <div class="register-container mt-5">
         <div class="card register-card">
             <div class="register-header">
                 <i class="fas fa-user-plus"></i>

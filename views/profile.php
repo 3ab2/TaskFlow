@@ -62,10 +62,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="profile-header">
+    <div class="profile-header mt-4">
         <div class="container text-center">
-            <img src="../assets/images/profil.png"
-                alt="Photo de profil" class="profile-picture mb-3">
+            <img src="../assets/images/compte-dutilisateur.png"
+                alt="Photo de profil" class="profile-picture mb-4">
             <h2><?php echo htmlspecialchars($user['username']); ?></h2>
             <p class="mb-0"><?php echo htmlspecialchars($user['email']); ?></p>
         </div>

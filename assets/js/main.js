@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Gestion du thème
     const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return; // Exit if themeToggle does not exist
+
     const htmlElement = document.documentElement;
     const currentTheme = localStorage.getItem('theme') || 'light';
     
@@ -31,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gestion du statut utilisateur
     const statusDropdownItems = document.querySelectorAll('[data-status]');
     const statusButton = document.getElementById('statusDropdown');
+    if (!statusButton) return; // Exit if statusButton does not exist
+
     
     if (statusDropdownItems && statusButton) {
         statusDropdownItems.forEach(item => {

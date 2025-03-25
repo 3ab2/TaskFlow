@@ -32,7 +32,9 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 <body>
     <?php include "../includes/navbar.php"; ?>
 
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4 mt-3">
+    <h2 class="text-center mb-4"> Tableau de bord</h2>
+    <p class="text-center mb-4">Suivez vos tâches et votre progression grâce à un tableau de bord clair et interactif.</p>
         <!-- En-tête avec statistiques -->
         <div class="stats-container">
             <div class="stat-card">
@@ -255,7 +257,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
+                <p>&copy; 2021 - <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
             </div>
         </div>
     </footer>

@@ -37,6 +37,7 @@ $showEqualImage = ($total == $completed && $total > 0);
 
     <div class="container py-4 " style="margin-top: 10px;">
         <h2 class="text-center mb-4"> Statistiques des Tâches</h2>
+        <p class="text-center mb-4">Suivez vos tâches et votre progression en temps reel.</p>
 
         <!-- Explication de la lecture du diagramme -->
         <div class="alert alert-info" role="alert">
