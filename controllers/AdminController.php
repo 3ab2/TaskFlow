@@ -629,4 +629,19 @@ class AdminController {
             throw $e;
         }
     }
-} 
+
+    public function getNbNotif() {
+        $notifications = $this->getUserNotifications();
+        return count($notifications);
+    }
+
+    public function getUserNotifications() {
+        if (!isset($_SESSION['user_id'])) {
+            return ['error' => 'User not logged in'];
+        }
+
+        $stmt = $this->db->prepare("SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC");
+        $stmt->execute([$_SESSION['user_id']]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}

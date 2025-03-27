@@ -52,6 +52,11 @@ if (session_status() === PHP_SESSION_NONE) {
                 <button id="themeToggle" class="btn btn-outline-primary me-2" onclick="toggleTheme()">
                     <i class="fas fa-moon"></i>
                 </button>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="/pfe/views/notification.php" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                    </a>
+                <?php endif; ?>
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <a href="/pfe/views/auth/login.php" class="btn btn-outline-primary me-2">
                         <i class="fas fa-sign-in-alt"></i> Connexion
@@ -291,6 +296,18 @@ if (session_status() === PHP_SESSION_NONE) {
     .navbar-brand:hover,
     .nav-link:hover {
         opacity: 0.9;
+    }
+
+    .navbar .nav-link i.fa-bell {
+        padding: 10px 13px;
+        border: 1px solid white;
+        border-radius: 20%;
+        margin: 10px;
+    }
+
+    .navbar .nav-link i.fa-bell:hover {
+        background-color: white;
+        color: #6366f1;
     }
 
     .btn-outline-primary {
