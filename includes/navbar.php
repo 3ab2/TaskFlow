@@ -64,7 +64,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a href="/pfe/views/auth/register.php" class="btn btn-primary">
                         <i class="fas fa-user-plus"></i> Inscription
                     </a>
-                    
+
                 <?php else: ?>
                     <div class="dropdown me-2">
                         <button class="btn btn-outline-primary" type="button" id="statusDropdown" data-bs-toggle="dropdown">
@@ -106,11 +106,17 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <i class="fas fa-cog me-2"></i> Paramètres
                                 </a>
                             </li>
+                            <li >
+                                <a class="dropdown-item" href="/pfe/views/activite.php">
+                                    <i class="fas fa-history"></i> Activité récente
+                                </a>
+                            </li>
+
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/pfe/controllers/logout.php">
+                                <a class="dropdown-item text-danger" href="/pfe/controllers/logout.php">
                                     <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
                                 </a>
                             </li>

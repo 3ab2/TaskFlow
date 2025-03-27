@@ -32,7 +32,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 <body>
     <?php include "../includes/navbar.php"; ?>
 
-    <div class="container-fluid py-4 mt-3">
+    <div class="container-fluid py-4 mt-5">
     <h2 class="text-center mb-4"> Tableau de bord</h2>
     <p class="text-center mb-4">Suivez vos tâches et votre progression grâce à un tableau de bord clair et interactif.</p>
         <!-- En-tête avec statistiques -->

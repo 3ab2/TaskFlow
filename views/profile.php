@@ -103,7 +103,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
 
             <div class="col-md-8">
-                <div class="row">
+                <div class="row" >
                     <div class="col-md-6">
                         <div class="stat-card text-center">
                             <i class="fas fa-tasks text-primary"></i>
@@ -134,14 +134,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     </div>
                 </div>
 
-                <div class="card mt-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Activité récente</h5>
-                        <div id="activityTimeline" class="timeline">
-                            <!-- Les activités seront chargées dynamiquement -->
-                        </div>
-                    </div>
-                </div>
+        
             </div>
         </div>
     </div>

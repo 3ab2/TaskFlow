@@ -20,6 +20,7 @@ if ($typeFilter || $priorityFilter) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,18 +32,20 @@ if ($typeFilter || $priorityFilter) {
     <link rel="stylesheet" href="/pfe/assets/css/dashboard.css">
 
     <style>
-        h2, p {
+        h2,
+        p {
             text-align: center;
         }
     </style>
 </head>
+
 <body>
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-    <div class="container mt-5">
+    <div class="container mt-5" style="margin-top: 10px;">
         <h2>Notifications</h2>
         <p>Cette page contient les notifications envoyées par l'equipe de support.</p>
-        
+
         <?php if (empty($notifications)): ?>
             <div class="alert alert-info">Aucune notification à afficher.</div>
         <?php else: ?>
@@ -85,16 +88,18 @@ if ($typeFilter || $priorityFilter) {
                         <button type="submit" class="btn btn-primary w-50">
                             <i class="fa-solid fa-filter me-2"></i> Filtrer
                         </button>
-                        <button type="button" class="btn btn-secondary w-50 ms-2" onclick="window.location.href='/pfe/views/notification.php'">
+                        <button type="button" class="btn btn-secondary w-50 ms-2"
+                            onclick="window.location.href='/pfe/views/notification.php'">
                             <i class="fa-solid fa-rotate-left me-2"></i> Réinitialiser
                         </button>
                     </div>
                 </div>
             </form>
-            
+
             <ul class="list-group">
                 <?php foreach ($notifications as $notification): ?>
-                    <li class="list-group-item <?php echo $notification['type'] === 'info' ? 'bg-info' : ($notification['type'] === 'success' ? 'bg-success' : ($notification['type'] === 'warning' ? 'bg-warning' : 'bg-danger')); ?>">
+                    <li
+                        class="list-group-item <?php echo $notification['type'] === 'info' ? 'bg-info' : ($notification['type'] === 'success' ? 'bg-success' : ($notification['type'] === 'warning' ? 'bg-warning' : 'bg-danger')); ?>">
                         <strong><?php echo htmlspecialchars($notification['title']); ?></strong><br>
                         <?php echo htmlspecialchars($notification['message']); ?><br>
                         <small class="text-muted">Reçu le <?php echo htmlspecialchars($notification['created_at']); ?></small>
@@ -121,10 +126,50 @@ if ($typeFilter || $priorityFilter) {
             </ul>
         <?php endif; ?>
     </div>
+    <!-- Footer -->
+    <footer style="margin-top: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-section">
+                    <h5>À propos de TaskFlow</h5>
+                    <p>TaskFlow est une solution moderne de gestion de tâches conçue pour optimiser votre productivité
+                        et simplifier votre organisation quotidienne.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/3ab2u.art"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/3ab2u.art"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCn2E5b4o2M2XyKw2oP4pZyA"><i
+                                class="fab fa-youtube"></i></a>
+                        <a href="https://github.com/3ab2"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h5>Liens Rapides</h5>
+                    <ul class="footer-links">
+                        <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
+
+                        <li><a href="/pfe/FAQ.php">FAQ</a></li>
+                        <li><a href="/pfe/support.php">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 footer-section">
+                    <h5>Contact</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope me-2"></i> elkarchabdo@gmail.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +212 789 123 456</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> C I T </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2021 - <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/pfe/assets/js/main.js"></script>
     <script src="/pfe/assets/js/tasks.js"></script>
 </body>
-</html>
 
+</html>

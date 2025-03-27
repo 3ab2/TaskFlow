@@ -202,7 +202,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <a class="nav-link <?php echo $current_page === 'profile.php' ? 'active' : ''; ?>"
                         href="/pfe/views/admin/profile.php">
                         <i class="fas fa-user-circle"></i>
-
+                        <span>Profil</span>
                     </a>
                 </li>
             </ul>

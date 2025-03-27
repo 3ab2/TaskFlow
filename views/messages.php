@@ -134,7 +134,7 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body style="margin-top: 10px;">
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="container mt-4" >
+    <div class="container mt-5" >
         <h2 class="text-center mb-4"> Messagerie</h2>
         <p class="text-center mb-4">Bienvenue dans votre espace de messagerie, où vous pouvez échanger des messages avec vos collègues et collaborateurs.</p>
 
