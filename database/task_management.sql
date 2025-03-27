@@ -177,8 +177,23 @@ CREATE TABLE `user_preferences` (
   `user_id` int(11) NOT NULL,
   `theme` enum('light','dark') DEFAULT 'light',
   `notifications_enabled` tinyint(1) DEFAULT 1,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `language` enum('fr','en','ar') DEFAULT 'fr',
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_user_preferences_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Create admin_activity table
+--
+CREATE TABLE IF NOT EXISTS `admin_activity` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `admin_id` INT NOT NULL,
+    `action` VARCHAR(50) NOT NULL,
+    `details` TEXT NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_id) REFERENCES users(id) ON DELETE CASCADE
+);
 
 --
 -- Indexes for dumped tables

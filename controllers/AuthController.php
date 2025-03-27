@@ -8,6 +8,12 @@ class AuthController {
         $this->db = $database->getConnection();
     }
 
+    public function getUserByEmail($email) {
+        $stmt = $this->db->prepare("SELECT id, username, email, password, status, role FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function register($username, $email, $password, $confirm_password) {
         $errors = [];
 
@@ -43,7 +49,7 @@ class AuthController {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insérer l'utilisateur
-        $stmt = $this->db->prepare("INSERT INTO users (username, email, password, status) VALUES (?, ?, ?, 'available')");
+        $stmt = $this->db->prepare("INSERT INTO users (username, email, password, status, role) VALUES (?, ?, ?, 'available', 'user')");
         
         if ($stmt->execute([$username, $email, $hashed_password])) {
             return [
@@ -71,7 +77,7 @@ class AuthController {
         }
 
         // Vérifier les identifiants
-        $stmt = $this->db->prepare("SELECT id, username, email, password, status FROM users WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT id, username, email, password, status, role FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -82,10 +88,11 @@ class AuthController {
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['status'] = $user['status'];
+            $_SESSION['role'] = $user['role'];
 
             return [
                 'success' => true,
-                'redirect' => '/pfe/views/dashboard.php'
+                'redirect' => $user['role'] === 'admin' ? '/pfe/views/admin/dashboard.php' : '/pfe/views/dashboard.php'
             ];
         }
 

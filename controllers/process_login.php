@@ -11,8 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $auth->login($email, $password);
     
     if ($result['success']) {
-        // Redirection vers le tableau de bord
-        header('Location: /pfe/views/dashboard.php');
+        // Vérifier si l'utilisateur est un admin
+        $user = $auth->getUserByEmail($email);
+        if ($user && $user['role'] === 'admin') {
+            header('Location: /pfe/views/admin/dashboard.php');
+        } else {
+            header('Location: /pfe/views/dashboard.php');
+        }
         exit();
     } else {
         $_SESSION['error'] = implode('<br>', $result['errors']);
