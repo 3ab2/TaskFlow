@@ -53,8 +53,17 @@ if (session_status() === PHP_SESSION_NONE) {
                     <i class="fas fa-moon"></i>
                 </button>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="/pfe/views/notification.php" class="nav-link">
+                    <a href="/pfe/views/notification.php" class="nav-link position-relative">
                         <i class="fas fa-bell"></i>
+                        <?php
+                        require_once __DIR__ . '/../controllers/AdminController.php';
+                        $adminController = new AdminController();
+                        $unreadCount = $adminController->getUnreadNotificationsCount($_SESSION['user_id']);
+                        if ($unreadCount > 0): ?>
+                            <span class="position-absolute notification-badge">
+                                <?php echo $unreadCount > 99 ? '99+' : $unreadCount; ?>
+                            </span>
+                        <?php endif; ?>
                     </a>
                 <?php endif; ?>
                 <?php if (!isset($_SESSION['user_id'])): ?>
@@ -309,11 +318,60 @@ if (session_status() === PHP_SESSION_NONE) {
         border: 1px solid white;
         border-radius: 20%;
         margin: 10px;
+        position: relative;
+    }
+    .navbar .nav-link i.fa-bell:hover{
+       
+        background-color: white;
+        color:#6366f1;
     }
 
-    .navbar .nav-link i.fa-bell:hover {
-        background-color: white;
-        color: #6366f1;
+    .notification-badge {
+        position: absolute;
+        top: 2px;
+        right: -11px;
+        background-color: #ff4444;
+        color: white;
+        border-radius: 12px;
+        padding: 2px 6px;
+        font-size: 12px;
+        min-width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid white;
+        font-weight: bold;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    .notification-badge {
+        animation: pulse 2s infinite;
+    }
+
+    .nav-link:hover i.fa-bell {
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+        .notification-badge {
+            top: -5px;
+            right: -5px;
+        }
     }
 
     .btn-outline-primary {

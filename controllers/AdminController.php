@@ -593,40 +593,20 @@ class AdminController {
         }
 
         try {
-            $this->db->beginTransaction();
-
-            foreach ($recipients as $recipient_id) {
-                // Vérifier si le destinataire existe
-                $stmt = $this->db->prepare("SELECT id FROM users WHERE id = ?");
-                $stmt->execute([$recipient_id]);
-                if (!$stmt->fetch()) {
-                    throw new Exception("Un ou plusieurs destinataires n'existent pas");
-                }
-
-                // Insérer la notification
-                $stmt = $this->db->prepare("
-                    INSERT INTO notifications (user_id, title, message, type, priority, is_read, created_at)
-                    VALUES (?, ?, ?, ?, ?, FALSE, NOW())
-                ");
-                
-                $result = $stmt->execute([$recipient_id, $title, $message, $type, $priority]);
-                
-                if (!$result) {
-                    throw new Exception("Erreur lors de l'envoi de la notification");
-                }
+            $stmt = $this->db->prepare("
+                INSERT INTO notifications 
+                (user_id, title, message, type, priority, is_read, created_at) 
+                VALUES (?, ?, ?, ?, ?, 0, NOW())
+            ");
+            
+            foreach ($recipients as $userId) {
+                $stmt->execute([$userId, $title, $message, $type, $priority]);
             }
-
-            $this->db->commit();
-            $this->logActivity(
-                'Notification Sent',
-                "Sent notification: {$title} to " . count($recipients) . " recipients"
-            );
-
+            
             return true;
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            error_log("Error sending notification: " . $e->getMessage());
-            throw $e;
+        } catch (PDOException $e) {
+            error_log("Erreur lors de l'envoi de la notification : " . $e->getMessage());
+            return false;
         }
     }
 
@@ -643,5 +623,35 @@ class AdminController {
         $stmt = $this->db->prepare("SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC");
         $stmt->execute([$_SESSION['user_id']]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getUnreadNotificationsCount($userId) {
+        try {
+            $stmt = $this->db->prepare("
+                SELECT COUNT(*) as count 
+                FROM notifications 
+                WHERE user_id = ? AND is_read = 0
+            ");
+            $stmt->execute([$userId]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['count'];
+        } catch (PDOException $e) {
+            error_log("Erreur lors du comptage des notifications : " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    public function markNotificationsAsRead($userId) {
+        try {
+            $stmt = $this->db->prepare("
+                UPDATE notifications 
+                SET is_read = 1 
+                WHERE user_id = ? AND is_read = 0
+            ");
+            return $stmt->execute([$userId]);
+        } catch (PDOException $e) {
+            error_log("Erreur lors de la mise à jour des notifications : " . $e->getMessage());
+            return false;
+        }
     }
 }

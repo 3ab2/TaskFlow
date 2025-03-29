@@ -16,6 +16,11 @@ if ($typeFilter || $priorityFilter) {
         return $typeMatch && $priorityMatch;
     });
 }
+
+// Ajouter au début du fichier après la récupération des notifications
+if (!empty($notifications)) {
+    $adminController->markNotificationsAsRead($_SESSION['user_id']);
+}
 ?>
 
 <!DOCTYPE html>
