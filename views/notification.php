@@ -89,8 +89,8 @@ if (!empty($notifications)) {
                             </option>
                         </select>
                     </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-50">
+                    <div class="col-md-4  d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-50 mt-4">
                             <i class="fa-solid fa-filter me-2"></i> Filtrer
                         </button>
                         <button type="button" class="btn btn-secondary w-50 ms-2"
@@ -104,7 +104,8 @@ if (!empty($notifications)) {
             <ul class="list-group">
                 <?php foreach ($notifications as $notification): ?>
                     <li
-                        class="list-group-item <?php echo $notification['type'] === 'info' ? 'bg-info' : ($notification['type'] === 'success' ? 'bg-success' : ($notification['type'] === 'warning' ? 'bg-warning' : 'bg-danger')); ?>">
+                        class="list-group-item mb-1 <?php echo $notification['type'] === 'info' ? 'bg-info' : ($notification['type'] === 'success' ? 'bg-success' : ($notification['type'] === 'warning' ? 'bg-warning' : 'bg-danger')); ?>"
+                        style="border-radius: 30px;">
                         <strong><?php echo htmlspecialchars($notification['title']); ?></strong><br>
                         <?php echo htmlspecialchars($notification['message']); ?><br>
                         <small class="text-muted">Reçu le <?php echo htmlspecialchars($notification['created_at']); ?></small>
@@ -119,11 +120,11 @@ if (!empty($notifications)) {
                         <?php endif; ?>
                         <span class="float-end">
                             <?php if ($notification['priority'] === 'low'): ?>
-                                <i class="fa-solid fa-arrow-down text-secondary"></i>
+                                <i class="fa-solid fa-arrow-down text-primary"></i>
                             <?php elseif ($notification['priority'] === 'normal'): ?>
                                 <i class="fa-solid fa-arrow-right text-primary"></i>
                             <?php else: ?>
-                                <i class="fa-solid fa-arrow-up text-danger"></i>
+                                <i class="fa-solid fa-arrow-up text-primary"></i>
                             <?php endif; ?>
                         </span>
                     </li>

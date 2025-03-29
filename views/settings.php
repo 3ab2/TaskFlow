@@ -34,8 +34,8 @@ if (!isset($_SESSION['user_id'])) {
         <h2 class="mb-4">Paramètres</h2>
 
         <div class="row">
-            <div class="col-md-3">
-                <div class="list-group">
+            <div class="col-md-12 text-center">
+                <div class="list-group list-group-horizontal">
                     <a href="#general" class="list-group-item list-group-item-action active" data-bs-toggle="list">
                         <i class="fas fa-cog me-2"></i> Général
                     </a>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-12 mt-3">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="general">
                         <div class="card">
