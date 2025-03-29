@@ -105,7 +105,7 @@ if (!empty($notifications)) {
                 <?php foreach ($notifications as $notification): ?>
                     <li
                         class="list-group-item mb-1 <?php echo $notification['type'] === 'info' ? 'bg-info' : ($notification['type'] === 'success' ? 'bg-success' : ($notification['type'] === 'warning' ? 'bg-warning' : 'bg-danger')); ?>"
-                        style="border-radius: 30px;">
+                        style="border-radius: 30px 30px 0px 30px;">
                         <strong><?php echo htmlspecialchars($notification['title']); ?></strong><br>
                         <?php echo htmlspecialchars($notification['message']); ?><br>
                         <small class="text-muted">Reçu le <?php echo htmlspecialchars($notification['created_at']); ?></small>

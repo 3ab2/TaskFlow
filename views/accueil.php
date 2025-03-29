@@ -27,7 +27,7 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Comment utiliser notre site ?</h2>
         <div class="row">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100" >
+            <div class="col-md-4 mb-5" data-aos="fade-up" data-aos-delay="100" >
                 <div class="card p-4 text-center shadow-sm">
                     <i class="fas fa-chart-line fa-3x text-primary"></i>
                     <h4 class="mt-3">Tableau de bord</h4>
@@ -35,7 +35,7 @@
                     <a href="/pfe/views/dashboard.php" class="btn btn-primary">Accéder</a>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300" >
+            <div class="col-md-4 mb-5" data-aos="fade-up" data-aos-delay="200" >
                 <div class="card p-4 text-center shadow-sm">
                     <i class="fas fa-envelope fa-3x text-success"></i>
                     <h4 class="mt-3">Messagerie</h4>
@@ -43,7 +43,7 @@
                     <a href="/pfe/views/messages.php" class="btn btn-success">Accéder</a>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="col-md-4 mb-5" data-aos="fade-up" data-aos-delay="300">
                 <div class="card p-4 text-center shadow-sm">
                     <i class="fas fa-chart-pie fa-3x text-danger"></i>
                     <h4 class="mt-3">Statistiques</h4>
@@ -57,6 +57,28 @@
     <!-- FAQ Section -->
     <section class="container my-5">
         <h2 class="text-center mb-4">Foire Aux Questions</h2>
+<div class="container my-4">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" id="faqSearch" placeholder="Rechercher une question...">
+        <button class="btn btn-outline-secondary" type="button" onclick="searchFAQ()">Rechercher</button>
+    </div>
+</div>
+
+<script>
+    function searchFAQ() {
+        const query = document.getElementById('faqSearch').value.toLowerCase();
+        const items = document.querySelectorAll('.accordion-item');
+        items.forEach(item => {
+            const question = item.querySelector('.accordion-button').innerText.toLowerCase();
+            if (question.includes(query)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+</script>
+
         <div class="accordion" id="faqAccordion">
             <div class="accordion-item">
                 <h2 class="accordion-header">
