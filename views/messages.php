@@ -56,15 +56,15 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .alert {
             border:none;
-            border-bottom: 2px solid rgb(22, 198, 60);
+            border-bottom: 1px solid rgb(22, 198, 60);
             border-right: 1px solid rgb(22, 198, 60);
-            border-radius: 30px;
+            border-radius: 20px;
             padding: 10px 15px;
             margin-bottom: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             position: relative;
-            max-width: 40%;
+            max-width: 80%;
         }
 
         .alert:hover {
@@ -142,17 +142,16 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="card">
             <div class="card-body">
                 <!-- Zone d'affichage des messages -->
-                <div class="chat-box p-3" style="max-height: 400px; overflow-y: auto;">
+                <div class="chat-box p-3" style="max-height:fit-content; overflow-y: auto;">
                     <?php foreach ($messages as $message): ?>
                         <div
                             class="d-flex <?php echo ($message['user_id'] == $user_id) ? 'justify-content-end' : 'justify-content-start'; ?>">
-                            <div
-                                class="alert <?php echo ($message['user_id'] == $user_id) ? 'alert-primary' : 'alert-info'; ?> w-75 ">
+                            <div class="alert <?php echo ($message['user_id'] == $user_id) ? 'alert-primary' : 'alert-info'; ?> w-75 ">
                                 <i class="fas fa-user-circle me-2"></i>
                                 <small class="text-muted"
                                     style="color: <?= '#' . substr(md5($message['username']), 0, 6); ?>; font-weight: bold;"><?= htmlspecialchars($message['username']); ?>
                                     
-                                   </small> <i style="color: rgb(0, 0, 0, 0.5); font-size: 0.7rem;"> - Is sent this message at <?= $message['created_at']; ?></i>
+                                   </small> <i style="color: rgb(0, 0, 0, 0.5); font-size: 0.7rem;">  <?= date('l  H:i', strtotime($message['created_at'])); ?></i>
 
                                 <p class="mb-0"><?= nl2br(htmlspecialchars($message['content'])); ?></p>
                                 <div class="message-actions" style="position: relative;">
