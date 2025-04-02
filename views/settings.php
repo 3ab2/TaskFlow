@@ -198,38 +198,38 @@ if (!isset($_SESSION['user_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Charger les paramètres sauvegardés
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.getElementById('themeSelect').value = savedTheme;
-            document.body.setAttribute('data-theme', savedTheme);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Charger les paramètres sauvegardés
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.getElementById('themeSelect').value = savedTheme;
+        document.body.setAttribute('data-theme', savedTheme);
 
-            // Gérer le changement de thème
-            document.getElementById('themeSelect').addEventListener('change', function (e) {
-                const theme = e.target.value;
-                document.body.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-            });
+        // Gérer le changement de thème
+        document.getElementById('themeSelect').addEventListener('change', function (e) {
+            const theme = e.target.value;
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
 
-            // Gérer la soumission des formulaires
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const formData = new FormData(form);
-                    const data = Object.fromEntries(formData.entries());
+        // Gérer la soumission des formulaires
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
 
-                    // Sauvegarder les paramètres
-                    Object.entries(data).forEach(([key, value]) => {
-                        localStorage.setItem(key, value);
-                    });
-
-                    // Afficher un message de succès
-                    alert('Paramètres sauvegardés avec succès !');
+                // Sauvegarder les paramètres
+                Object.entries(data).forEach(([key, value]) => {
+                    localStorage.setItem(key, value);
                 });
+
+                // Afficher un message de succès
+                alert('Paramètres sauvegardés avec succès !');
             });
         });
-    </script>
+    });
+</script>
 </body>
 
 </html>
