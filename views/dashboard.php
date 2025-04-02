@@ -33,8 +33,9 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
     <?php include "../includes/navbar.php"; ?>
 
     <div class="container-fluid py-4 mt-5">
-    <h2 class="text-center mb-4"> Tableau de bord</h2>
-    <p class="text-center mb-4">Suivez vos tâches et votre progression grâce à un tableau de bord clair et interactif.</p>
+        <h2 class="text-center mb-4"> Tableau de bord</h2>
+        <p class="text-center mb-4">Suivez vos tâches et votre progression grâce à un tableau de bord clair et
+            interactif.</p>
         <!-- En-tête avec statistiques -->
         <div class="stats-container">
             <div class="stat-card">
@@ -66,106 +67,118 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
                 <i class="fas fa-plus"></i> Nouvelle tâche
             </button>
         </div>
-
-        <!--l'En-tête de Tableau Kanban -->
-        <div class="task-board">
-            <div class="task-column">
-                <h5><i class="fas fa-list" style="color:red;"></i> &nbsp; À faire</h5>
-
-            </div>
-
-            <div class="task-column">
-                <h5><i class="fas fa-spinner" style="color:rgb(255, 225, 0);"></i>&nbsp; En cours</h5>
-
-            </div>
-
-            <div class="task-column">
-                <h5><i class="fas fa-check" style="color:green;"></i>&nbsp; Terminées</h5>
-
-            </div>
-        </div>
     </div>
 
 
 
     <!-- Tableau Kanban -->
-    <div class="task-board">
-        <div class="task-column" data-status="to_do" id="todoTasks">
-            <h5><i class="fas fa-list"></i> À faire</h5>
-            <?php foreach ($tasks as $task): ?>
-                <?php if ($task['status'] === 'to_do'): ?>
-                    <div class="task-card priority-<?php echo $task['priority']; ?>" data-task-id="<?php echo $task['id']; ?>">
-                        <h6><?php echo htmlspecialchars($task['title']); ?></h6>
-                        <p class="mb-2"><?php echo htmlspecialchars($task['description']); ?></p>
-                        <div class="deadline">
-                            <i class="far fa-clock"></i>
-                            <?php echo $task['deadline'] ? date('d/m/Y', strtotime($task['deadline'])) : 'Pas de date limite'; ?>
-                        </div>
-                        <div class="task-actions">
-                            <button class="btn btn-sm btn-outline-primary edit-task" data-task-id="<?php echo $task['id']; ?>">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger delete-task" data-task-id="<?php echo $task['id']; ?>">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
+
+    <div class="row mx-3">
+        <div class="col-md-4 tache-a-faire">
+            <div style="background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; text-align: center; margin-bottom:-10px;">
+                <h5 style="display: inline-block; margin:0 auto;"><i class="fas fa-list" style="color:red;"></i> &nbsp; À faire</h5>
+            </div>
+            <div class="task-board">
+                <div class="task-column" data-status="to_do" id="todoTasks">
+                    
+                    <?php foreach ($tasks as $task): ?>
+                        <?php if ($task['status'] === 'to_do'): ?>
+                            <div class="task-card priority-<?php echo $task['priority']; ?>"
+                                data-task-id="<?php echo $task['id']; ?>">
+                                <h6><?php echo htmlspecialchars($task['title']); ?></h6>
+                                <p class="mb-2"><?php echo htmlspecialchars($task['description']); ?></p>
+                                <div class="deadline">
+                                    <i class="far fa-clock"></i>
+                                    <?php echo $task['deadline'] ? date('d/m/Y', strtotime($task['deadline'])) : 'Pas de date limite'; ?>
+                                </div>
+                                <div class="task-actions">
+                                    <button class="btn btn-sm btn-outline-primary edit-task"
+                                        data-task-id="<?php echo $task['id']; ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger delete-task"
+                                        data-task-id="<?php echo $task['id']; ?>">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="task-column" data-status="in_progress" id="inProgressTasks">
-            <h5><i class="fas fa-spinner"></i> En cours</h5>
-            <?php foreach ($tasks as $task): ?>
-                <?php if ($task['status'] === 'in_progress'): ?>
-                    <div class="task-card priority-<?php echo $task['priority']; ?>" data-task-id="<?php echo $task['id']; ?>">
-                        <h6><?php echo htmlspecialchars($task['title']); ?></h6>
-                        <p class="mb-2"><?php echo htmlspecialchars($task['description']); ?></p>
-                        <div class="deadline">
-                            <i class="far fa-clock"></i>
-                            <?php echo $task['deadline'] ? date('d/m/Y', strtotime($task['deadline'])) : 'Pas de date limite'; ?>
+        <div class="col-md-4 tahe-en-cours">
+
+            <div style="background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 10px;">
+                <h5 style="display: inline-block; margin: 0 auto;"><i class="fas fa-spinner" style="color:rgb(255, 225, 0);"></i>&nbsp; En cours</h5>
+
+            </div>
+
+            <div class="task-column mb-3" data-status="in_progress" id="inProgressTasks">
+               
+                <?php foreach ($tasks as $task): ?>
+                    <?php if ($task['status'] === 'in_progress'): ?>
+                        <div class="task-card priority-<?php echo $task['priority']; ?>"
+                            data-task-id="<?php echo $task['id']; ?>">
+                            <h6><?php echo htmlspecialchars($task['title']); ?></h6>
+                            <p class="mb-2"><?php echo htmlspecialchars($task['description']); ?></p>
+                            <div class="deadline">
+                                <i class="far fa-clock"></i>
+                                <?php echo $task['deadline'] ? date('d/m/Y', strtotime($task['deadline'])) : 'Pas de date limite'; ?>
+                            </div>
+                            <div class="task-actions">
+                                <button class="btn btn-sm btn-outline-primary edit-task"
+                                    data-task-id="<?php echo $task['id']; ?>">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger delete-task"
+                                    data-task-id="<?php echo $task['id']; ?>">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="task-actions">
-                            <button class="btn btn-sm btn-outline-primary edit-task" data-task-id="<?php echo $task['id']; ?>">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger delete-task" data-task-id="<?php echo $task['id']; ?>">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
 
-        <div class="task-column" data-status="completed" id="completedTasks">
-            <h5><i class="fas fa-check"></i> Terminées</h5>
-            <?php foreach ($tasks as $task): ?>
-                <?php if ($task['status'] === 'completed'): ?>
-                    <div class="task-card priority-<?php echo $task['priority']; ?>" data-task-id="<?php echo $task['id']; ?>">
-                        <h6><?php echo htmlspecialchars($task['title']); ?></h6>
-                        <p class="mb-2"><?php echo htmlspecialchars($task['description']); ?></p>
-                        <div class="deadline">
-                            <i class="far fa-clock"></i>
-                            <?php echo $task['deadline'] ? date('d/m/Y', strtotime($task['deadline'])) : 'Pas de date limite'; ?>
+        <div class="col-md-4 tache-terminer">
+            <div style="background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 10px;">
+                <h5 style="display: inline-block; margin: 0 auto;"><i class="fas fa-check" style="color:green;"></i>&nbsp; Terminées</h5>
+
+            </div>
+
+            <div class="task-column" data-status="completed" id="completedTasks">
+              
+                <?php foreach ($tasks as $task): ?>
+                    <?php if ($task['status'] === 'completed'): ?>
+                        <div class="task-card priority-<?php echo $task['priority']; ?>"
+                            data-task-id="<?php echo $task['id']; ?>">
+                            <h6><?php echo htmlspecialchars($task['title']); ?></h6>
+                            <p class="mb-2"><?php echo htmlspecialchars($task['description']); ?></p>
+                            <div class="deadline">
+                                <i class="far fa-clock"></i>
+                                <?php echo $task['deadline'] ? date('d/m/Y', strtotime($task['deadline'])) : 'Pas de date limite'; ?>
+                            </div>
+                            <div class="task-actions">
+                                <button class="btn btn-sm btn-outline-primary edit-task"
+                                    data-task-id="<?php echo $task['id']; ?>">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger delete-task"
+                                    data-task-id="<?php echo $task['id']; ?>">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="task-actions">
-                            <button class="btn btn-sm btn-outline-primary edit-task" data-task-id="<?php echo $task['id']; ?>">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger delete-task" data-task-id="<?php echo $task['id']; ?>">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
-    </div>
-
-
-
 
 
 
