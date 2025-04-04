@@ -45,7 +45,7 @@ foreach ($messageStats as $stat) {
     $receivedData[$monthIndex] = $stat['received'];
 }
 
-// Récupérer le nombre total de messages envoyés et reçus
+// Récupérer le nombre total de messages
 $totalQuery = "SELECT 
                 COUNT(*) as total,
                 SUM(CASE WHEN user_id = :user_id THEN 1 ELSE 0 END) as total_sent,
@@ -346,11 +346,11 @@ if ($total == 0) {
                         <div class="message-stats">
                             <div class="stat-item">
                                 <i class="fas fa-paper-plane text-primary"></i>
-                                <span>Messages envoyés: <span id="sentCount">0</span></span>
+                                <span>Messages envoyés: <span id="sentCount"><?php echo $totalStats['total_sent']; ?></span></span>
                             </div>
                             <div class="stat-item">
                                 <i class="fas fa-inbox text-success"></i>
-                                <span>Messages reçus: <span id="receivedCount">0</span></span>
+                                <span>Messages reçus: <span id="receivedCount"><?php echo $totalStats['total_received']; ?></span></span>
                             </div>
                         </div>
                     </div>
@@ -548,16 +548,6 @@ if ($total == 0) {
                 }
             }
         });
-
-        // Fonction pour mettre à jour les statistiques en temps réel
-        function updateMessageStats() {
-            // Mettre à jour les compteurs avec les données réelles
-            document.getElementById('sentCount').textContent = <?php echo $totalStats['total_sent']; ?>;
-            document.getElementById('receivedCount').textContent = <?php echo $totalStats['total_received']; ?>;
-        }
-
-        // Mettre à jour les statistiques toutes les 30 secondes
-        setInterval(updateMessageStats, 30000);
     </script>
 
     <style>
