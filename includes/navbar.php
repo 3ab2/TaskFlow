@@ -38,11 +38,19 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="/pfe/views/messages.php">
+                        <a class="nav-link position-relative" href="/pfe/views/messages.php">
                             <i class="fas fa-comments"></i> Messagerie
+                            <?php
+                            require_once __DIR__ . '/../controllers/MessageController.php';
+                            $messageController = new MessageController();
+                            $unreadCount = $messageController->getUnreadMessagesCount($_SESSION['user_id']);
+                            if ($unreadCount > 0): ?>
+                                <span class="message-indicator">
+                                    <?php echo $unreadCount > 99 ? '99+' : $unreadCount; ?>
+                                </span>
+                            <?php endif; ?>
                         </a>
                     </li>
-
                 <?php endif; ?>
 
                 </li>
@@ -115,12 +123,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <i class="fas fa-cog me-2"></i> Paramètres
                                 </a>
                             </li>
-                            <li >
-                                <a class="dropdown-item" href="/pfe/views/activite.php">
-                                    <i class="fas fa-history"></i> Activité récente
-                                </a>
-                            </li>
-
+        
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -159,11 +162,19 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php endif; ?>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pfe/views/messages.php">
-                        <i class="fas fa-envelope"></i> Messagerie
+                    <a class="nav-link position-relative" href="/pfe/views/messages.php">
+                        <i class="fas fa-comments"></i> Messagerie
+                        <?php
+                        require_once __DIR__ . '/../controllers/MessageController.php';
+                        $messageController = new MessageController();
+                        $unreadCount = $messageController->getUnreadMessagesCount($_SESSION['user_id']);
+                        if ($unreadCount > 0): ?>
+                            <span class="message-indicator">
+                                <?php echo $unreadCount > 99 ? '99+' : $unreadCount; ?>
+                            </span>
+                        <?php endif; ?>
                     </a>
                 </li>
-
             <?php endif; ?>
 
             </li>
@@ -328,15 +339,15 @@ if (session_status() === PHP_SESSION_NONE) {
 
     .notification-badge {
         position: absolute;
-        top: 2px;
-        right: -11px;
+        top: -3px;
+        right: 0px;
         background-color: #ff4444;
         color: white;
         border-radius: 12px;
         padding: 2px 6px;
         font-size: 12px;
-        min-width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -420,6 +431,39 @@ if (session_status() === PHP_SESSION_NONE) {
             padding: 1rem;
             border-radius: 0.5rem;
             margin-top: 0.5rem;
+        }
+    }
+
+    .message-indicator {
+        position: absolute;
+        top: -5px;
+        right: -8px;
+        width: 18px;
+        height: 18px;
+        padding: 0 5px;
+        background-color: #ff4444;
+        border-radius: 9px;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
         }
     }
 </style>

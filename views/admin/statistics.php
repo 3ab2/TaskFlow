@@ -12,6 +12,9 @@ if (!$admin->isAdmin()) {
 $userStats = $admin->getUserStatistics();
 $taskStats = $admin->getTaskStatistics();
 $messageStats = $admin->getMessageStatistics();
+
+// Récupérer les statistiques des notifications
+$notificationStats = $admin->getNotificationStatistics();
 ?>
 
 <!DOCTYPE html>
@@ -253,6 +256,41 @@ $messageStats = $admin->getMessageStatistics();
             </div>
             <canvas id="messageTrendChart"></canvas>
         </div>
+
+        <!-- Nouveau graphique pour les notifications -->
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Statistiques des Notifications</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="notificationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Conseils et Recommandations</h5>
+                    </div>
+                    <div class="card-body">
+                        <?php if (!empty($notificationStats['advice'])): ?>
+                            <ul class="list-group">
+                                <?php foreach ($notificationStats['advice'] as $advice): ?>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-info-circle text-primary me-2"></i>
+                                        <?php echo htmlspecialchars($advice); ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else: ?>
+                            <p class="text-muted">Aucun conseil particulier pour le moment.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <?php include __DIR__ . '/../includes/admin_footer.php'; ?>
@@ -388,6 +426,41 @@ $messageStats = $admin->getMessageStatistics();
             
             // Ici, vous pouvez ajouter la logique pour mettre à jour les données
             // en fonction de la période sélectionnée
+        });
+
+        // Configuration du graphique des notifications
+        const notificationCtx = document.getElementById('notificationChart').getContext('2d');
+        new Chart(notificationCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Information', 'Avertissement', 'Erreur', 'Succès'],
+                datasets: [{
+                    data: [
+                        <?php echo $notificationStats['stats']['info_count']; ?>,
+                        <?php echo $notificationStats['stats']['warning_count']; ?>,
+                        <?php echo $notificationStats['stats']['error_count']; ?>,
+                        <?php echo $notificationStats['stats']['success_count']; ?>
+                    ],
+                    backgroundColor: [
+                        '#17a2b8', // Info - Bleu
+                        '#ffc107', // Warning - Jaune
+                        '#dc3545', // Error - Rouge
+                        '#28a745'  // Success - Vert
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Répartition des Notifications'
+                    }
+                }
+            }
         });
     </script>
 </body>

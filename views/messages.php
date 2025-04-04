@@ -1,10 +1,14 @@
 <?php
 session_start();
 require_once "../config/database.php";
+require_once "../controllers/MessageController.php";
 
 // Création d'une instance de la classe Database
 $database = new Database();
 $pdo = $database->getConnection(); // Récupération de la connexion PDO
+
+// Création d'une instance de MessageController
+$messageController = new MessageController();
 
 // Vérification si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
@@ -13,6 +17,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+
+// Marquer les messages comme lus
+$messageController->markMessagesAsRead($user_id);
 
 // Récupérer les messages depuis la base de données
 $query = "SELECT messages.*, users.username 
@@ -142,7 +149,7 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="card">
             <div class="card-body">
                 <!-- Zone d'affichage des messages -->
-                <div class="chat-box p-3" style="max-height:fit-content; overflow-y: auto;">
+                <div class="chat-box p-3" style="max-height:350px; overflow-y: auto;">
                     <?php foreach ($messages as $message): ?>
                         <div
                             class="d-flex <?php echo ($message['user_id'] == $user_id) ? 'justify-content-end' : 'justify-content-start'; ?>">

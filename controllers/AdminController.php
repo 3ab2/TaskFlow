@@ -654,4 +654,38 @@ class AdminController {
             return false;
         }
     }
+
+    public function getNotificationStatistics() {
+        $query = "SELECT 
+                    COUNT(*) as total,
+                    SUM(CASE WHEN type = 'info' THEN 1 ELSE 0 END) as info_count,
+                    SUM(CASE WHEN type = 'warning' THEN 1 ELSE 0 END) as warning_count,
+                    SUM(CASE WHEN type = 'error' THEN 1 ELSE 0 END) as error_count,
+                    SUM(CASE WHEN type = 'success' THEN 1 ELSE 0 END) as success_count
+                  FROM notifications";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $stats = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Ajouter des conseils basés sur les statistiques
+        $advice = [];
+        
+        if ($stats['error_count'] > 0) {
+            $advice[] = "Il y a des notifications d'erreur à traiter. Vérifiez les problèmes signalés.";
+        }
+        
+        if ($stats['warning_count'] > 5) {
+            $advice[] = "Nombre élevé d'avertissements. Considérez une revue des processus.";
+        }
+        
+        if ($stats['success_count'] < $stats['total'] * 0.3) {
+            $advice[] = "Le taux de succès est faible. Analysez les causes des problèmes.";
+        }
+
+        return [
+            'stats' => $stats,
+            'advice' => $advice
+        ];
+    }
 }

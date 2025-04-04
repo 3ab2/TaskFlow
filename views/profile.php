@@ -183,7 +183,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 
-    < <script>
+     <script>
         document.addEventListener('DOMContentLoaded', function() {
         // Charger les statistiques
         fetch('/pfe/api/tasks.php')
