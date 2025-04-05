@@ -123,7 +123,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <i class="fas fa-cog me-2"></i> Paramètres
                                 </a>
                             </li>
-        
+
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -331,28 +331,29 @@ if (session_status() === PHP_SESSION_NONE) {
         margin: 10px;
         position: relative;
     }
-    .navbar .nav-link i.fa-bell:hover{
-       
+
+    .navbar .nav-link i.fa-bell:hover {
+
         background-color: white;
-        color:#6366f1;
+        color: #6366f1;
     }
 
     .notification-badge {
         position: absolute;
-        top: -3px;
-        right: 0px;
+        top: 3px;
+        right: -3px;
         background-color: #ff4444;
         color: white;
         border-radius: 12px;
         padding: 2px 6px;
         font-size: 12px;
-        width: 15px;
-        height: 15px;
+        width: 16px;
+        height: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
         border: 1px solid white;
-        font-weight: bold;
+        font-weight:initial;
         transform: translate(-50%, -50%);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
@@ -361,9 +362,11 @@ if (session_status() === PHP_SESSION_NONE) {
         0% {
             transform: translate(-50%, -50%) scale(1);
         }
+
         50% {
             transform: translate(-50%, -50%) scale(1.1);
         }
+
         100% {
             transform: translate(-50%, -50%) scale(1);
         }
@@ -438,32 +441,32 @@ if (session_status() === PHP_SESSION_NONE) {
         position: absolute;
         top: -5px;
         right: -8px;
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
         padding: 0 5px;
         background-color: #ff4444;
         border-radius: 9px;
         color: white;
         font-size: 12px;
-        font-weight: bold;
+        font-weight:initial;
         display: flex;
         align-items: center;
+        border: 1px solid white;
         justify-content: center;
         animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
         0% {
-            transform: scale(1);
-            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
+
         50% {
-            transform: scale(1.1);
-            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(1.1);
         }
+
         100% {
-            transform: scale(1);
-            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
     }
 </style>
