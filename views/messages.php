@@ -65,7 +65,7 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
             border:none;
             border-bottom: 1px solid rgb(22, 198, 60);
             border-right: 1px solid rgb(22, 198, 60);
-            border-radius: 20px;
+            border-radius: 60px 60px 60px 0px;
             padding: 10px 15px;
             margin-bottom: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);

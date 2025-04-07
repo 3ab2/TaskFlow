@@ -78,8 +78,9 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
             <div style="background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; text-align: center; margin-bottom:-10px;">
                 <h5 style="display: inline-block; margin:0 auto;"><i class="fas fa-list" style="color:red;"></i> &nbsp; À faire</h5>
             </div>
-            <div class="task-board">
-                <div class="task-column" style="min-height: 140px; " data-status="to_do" id="todoTasks">
+
+            <div class="task-board" style="min-width: 110%; position: relative; right: 18px;">
+                <div class="task-column" style="min-height: 400px; " data-status="to_do" id="todoTasks">
                     
                     <?php foreach ($tasks as $task): ?>
                         <?php if ($task['status'] === 'to_do'): ?>
@@ -117,7 +118,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 
             </div>
 
-            <div class="task-column mb-3" style="min-height: 140px;" data-status="in_progress" id="inProgressTasks">
+            <div class="task-column mb-3"style="min-height: 400px; " data-status="in_progress" id="inProgressTasks">
                
                 <?php foreach ($tasks as $task): ?>
                     <?php if ($task['status'] === 'in_progress'): ?>
@@ -151,7 +152,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 
             </div>
 
-            <div class="task-column mb-3"  style="min-height: 140px;"  data-status="completed" id="completedTasks" >
+            <div class="task-column mb-3"  style="min-height: 400px; "  data-status="completed" id="completedTasks" >
               
                 <?php foreach ($tasks as $task): ?>
                     <?php if ($task['status'] === 'completed'): ?>

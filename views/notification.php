@@ -133,7 +133,7 @@ if (!empty($notifications)) {
         <?php endif; ?>
     </div>
     <!-- Footer -->
-    <footer style="margin-top: 20px;">
+    <footer style="margin-top: 100px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 footer-section">

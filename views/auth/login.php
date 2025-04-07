@@ -96,7 +96,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') {
 
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                    <label class="form-check-label" for="remember">Se souvenir de moi</label>
+                    <label class="form-check-label" for="remember">Me rappeler</label>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 mb-3">
