@@ -198,13 +198,112 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </li>
             </ul>
             <ul class="navbar-nav">
+            <li class="nav-item">
+                    <a class="nav-link" href="#" id="themeToggle">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </a>
+                </li>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const themeToggle = document.getElementById('themeToggle');
+                        const themeIcon = document.getElementById('themeIcon');
+                        
+                        // Vérifier le thème actuel
+                        const currentTheme = localStorage.getItem('theme') || 'light';
+                        document.body.classList.toggle('dark-mode', currentTheme === 'dark');
+                        themeIcon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+                        // Gestionnaire de clic pour basculer le thème
+                        themeToggle.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const isDark = document.body.classList.toggle('dark-mode');
+                            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                        });
+                    });
+                </script>
+                <style>
+                    .dark-mode {
+                        background-color: #1a1a1a;
+                        color: #e0e0e0;
+                    }
+                    .dark-mode .navbar {
+                        background-color: #2d2d2d;
+                        border-bottom: 1px solid #404040;
+                    }
+                    .dark-mode .nav-link {
+                        color: #e0e0e0;
+                    }
+                    .dark-mode .nav-link:hover {
+                        color: #ffffff;
+                        background-color: #404040;
+                    }
+                    .dark-mode .nav-link.active {
+                        background-color: #404040;
+                        color: #ffffff;
+                    }
+                    .dark-mode .card {
+                        background-color: #2d2d2d;
+                        border: 1px solid #404040;
+                    }
+                    .dark-mode .card-header {
+                        background-color: #333333;
+                        border-bottom: 1px solid #404040;
+                    }
+                    .dark-mode .form-control {
+                        background-color: #333333;
+                        border: 1px solid #404040;
+                        color: #e0e0e0;
+                    }
+                    .dark-mode .form-control:focus {
+                        background-color: #404040;
+                        border-color: #666666;
+                        color: #ffffff;
+                    }
+                    .dark-mode .btn {
+                        background-color: #404040;
+                        border-color: #666666;
+                        color: #e0e0e0;
+                    }
+                    .dark-mode .btn:hover {
+                        background-color: #4d4d4d;
+                        border-color: #808080;
+                        color: #ffffff;
+                    }
+                    .dark-mode .table {
+                        color: #ffffff;
+                        background-color: #333333;
+                    }
+                    .dark-mode .table td,
+                    .dark-mode .table th {
+                        border-color: #404040;
+                        background-color: #333333;
+                        color: #ffffff;
+                    }
+                    .dark-mode .list-group-item {
+                        background-color: #2d2d2d;
+                        border-color: #404040;
+                        color: #e0e0e0;
+                    }
+                    .dark-mode .list-group-item:hover {
+                        background-color: #404040;
+                    }
+                    .dark-mode .list-group-item.active {
+                        background-color: #0d6efd;
+                        border-color: #0d6efd;
+                    }
+                    .dark-mode .form-label {
+                        color: #ffffff;
+                    }
+                </style>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current_page === 'profile.php' ? 'active' : ''; ?>"
                         href="/pfe/views/admin/profile.php">
                         <i class="fas fa-user-circle"></i>
-                        <span>Profil</span>
+                        
                     </a>
                 </li>
+              
             </ul>
         </div>
     </div>

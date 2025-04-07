@@ -30,12 +30,12 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="container py-5">
-        <h2 class="mb-4">Paramètres</h2>
+    <div class="container py-3 py-md-5 mt-3">
+        <h2 class="mb-4 text-center text-md-start">Paramètres</h2>
 
         <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="list-group list-group-horizontal">
+            <div class="col-12">
+                <div class="list-group list-group-horizontal-md mb-3">
                     <a href="#general" class="list-group-item list-group-item-action active" data-bs-toggle="list">
                         <i class="fas fa-cog me-2"></i> Général
                     </a>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
 
-            <div class="col-md-12 mt-3">
+            <div class="col-12">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="general">
                         <div class="card">
@@ -74,7 +74,7 @@ if (!isset($_SESSION['user_id'])) {
                                             <option value="YYYY-MM-DD">YYYY-MM-DD</option>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                    <button type="submit" class="btn btn-primary w-100 w-md-auto">Enregistrer</button>
                                 </form>
                             </div>
                         </div>

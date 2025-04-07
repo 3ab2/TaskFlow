@@ -79,7 +79,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
                 <h5 style="display: inline-block; margin:0 auto;"><i class="fas fa-list" style="color:red;"></i> &nbsp; À faire</h5>
             </div>
             <div class="task-board">
-                <div class="task-column" data-status="to_do" id="todoTasks">
+                <div class="task-column" style="min-height: 140px; " data-status="to_do" id="todoTasks">
                     
                     <?php foreach ($tasks as $task): ?>
                         <?php if ($task['status'] === 'to_do'): ?>
@@ -117,7 +117,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 
             </div>
 
-            <div class="task-column mb-3" data-status="in_progress" id="inProgressTasks">
+            <div class="task-column mb-3" style="min-height: 140px;" data-status="in_progress" id="inProgressTasks">
                
                 <?php foreach ($tasks as $task): ?>
                     <?php if ($task['status'] === 'in_progress'): ?>
@@ -151,7 +151,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 
             </div>
 
-            <div class="task-column" data-status="completed" id="completedTasks">
+            <div class="task-column mb-3"  style="min-height: 140px;"  data-status="completed" id="completedTasks" >
               
                 <?php foreach ($tasks as $task): ?>
                     <?php if ($task['status'] === 'completed'): ?>

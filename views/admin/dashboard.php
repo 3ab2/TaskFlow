@@ -117,7 +117,7 @@ $messages = $admin->getAllMessages();
                                             </select>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-danger delete-user" data-id="<?php echo $user['id']; ?>">
+                                            <button class="btn btn-sm btn-danger delete-user" data-user-id="<?php echo $user['id']; ?>">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -186,7 +186,7 @@ $messages = $admin->getAllMessages();
                                             </select>
                                         </td>
                                         <td>
-                                            <button class="btn btn-sm btn-danger delete-task" data-id="<?php echo $task['id']; ?>">
+                                            <button class="btn btn-sm btn-danger delete-task" data-task-id="<?php echo $task['id']; ?>">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
@@ -310,30 +310,42 @@ $messages = $admin->getAllMessages();
 
             // Delete user
             $('.delete-user').click(function() {
-                if (confirm('Are you sure you want to delete this user?')) {
+                if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
                     const userId = $(this).data('user-id');
                     
                     $.post('/pfe/api/admin/delete_user.php', {
                         user_id: userId
-                    }).done(function() {
-                        location.reload();
-                    }).fail(function() {
-                        alert('Failed to delete user');
+                    })
+                    .done(function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert('Erreur lors de la suppression de l\'utilisateur');
+                        }
+                    })
+                    .fail(function() {
+                        alert('Erreur lors de la suppression de l\'utilisateur');
                     });
                 }
             });
 
             // Delete task
             $('.delete-task').click(function() {
-                if (confirm('Are you sure you want to delete this task?')) {
+                if (confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')) {
                     const taskId = $(this).data('task-id');
                     
                     $.post('/pfe/api/admin/delete_task.php', {
                         task_id: taskId
-                    }).done(function() {
-                        location.reload();
-                    }).fail(function() {
-                        alert('Failed to delete task');
+                    })
+                    .done(function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert('Erreur lors de la suppression de la tâche');
+                        }
+                    })
+                    .fail(function() {
+                        alert('Erreur lors de la suppression de la tâche');
                     });
                 }
             });

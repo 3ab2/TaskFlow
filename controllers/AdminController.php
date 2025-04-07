@@ -76,28 +76,62 @@ class AdminController {
 
     public function deleteUser($userId) {
         if (!$this->isAdmin()) {
-            return ['error' => 'Unauthorized access'];
+            return ['error' => 'Accès non autorisé'];
         }
         
         try {
-            $stmt = $this->db->prepare("SELECT username FROM users WHERE id = ?");
+            $this->db->beginTransaction();
+
+            // Vérifier si l'utilisateur existe
+            $stmt = $this->db->prepare("SELECT id, username FROM users WHERE id = ?");
             $stmt->execute([$userId]);
             $user = $stmt->fetch();
             
+            if (!$user) {
+                $this->db->rollBack();
+                return ['error' => 'Utilisateur non trouvé'];
+            }
+
+            // Supprimer d'abord les données liées
+            // 1. Supprimer les tâches de l'utilisateur
+            $stmt = $this->db->prepare("DELETE FROM tasks WHERE user_id = ?");
+            $stmt->execute([$userId]);
+
+            // 2. Supprimer les messages de l'utilisateur
+            $stmt = $this->db->prepare("DELETE FROM messages WHERE user_id = ?");
+            $stmt->execute([$userId]);
+
+            // 3. Supprimer les préférences de l'utilisateur
+            $stmt = $this->db->prepare("DELETE FROM user_preferences WHERE user_id = ?");
+            $stmt->execute([$userId]);
+
+            // 4. Supprimer les activités de l'utilisateur
+            $stmt = $this->db->prepare("DELETE FROM admin_activity WHERE admin_id = ?");
+            $stmt->execute([$userId]);
+
+            // 5. Supprimer les notifications de l'utilisateur
+            $stmt = $this->db->prepare("DELETE FROM notifications WHERE user_id = ?");
+            $stmt->execute([$userId]);
+
+            // Enfin, supprimer l'utilisateur
             $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
             $result = $stmt->execute([$userId]);
             
             if ($result) {
                 $this->logActivity(
                     'User Delete',
-                    "Deleted user {$user['username']}"
+                    "Suppression de l'utilisateur {$user['username']}"
                 );
+                $this->db->commit();
+                return true;
+            } else {
+                $this->db->rollBack();
+                return ['error' => 'Échec de la suppression de l\'utilisateur'];
             }
-            
-            return $result;
         } catch (PDOException $e) {
-            error_log("Error deleting user: " . $e->getMessage());
-            return false;
+            $this->db->rollBack();
+            error_log("Erreur lors de la suppression de l'utilisateur: " . $e->getMessage());
+            return ['error' => 'Erreur de base de données lors de la suppression'];
         }
     }
 

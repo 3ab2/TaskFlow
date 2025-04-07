@@ -309,4 +309,50 @@ canvas{
     .btn {
         padding: 0.5rem 1rem;
     }
+
+    .list-group-horizontal {
+        flex-direction: column !important;
+    }
+
+    .list-group-horizontal .list-group-item {
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .tab-content {
+        padding: 0;
+    }
+
+    .card {
+        margin: 0 -15px;
+        border-radius: 0;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .form-select, .form-control {
+        font-size: 16px; /* Empêche le zoom sur iOS */
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    /* Footer responsive */
+    .footer-section {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .footer-links {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
 }

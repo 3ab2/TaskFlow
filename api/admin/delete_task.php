@@ -8,13 +8,13 @@ $admin = new AdminController();
 
 if (!$admin->isAdmin()) {
     http_response_code(403);
-    echo json_encode(['error' => 'Unauthorized access']);
+    echo json_encode(['error' => 'Accès non autorisé']);
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
+    echo json_encode(['error' => 'Méthode non autorisée']);
     exit();
 }
 
@@ -22,13 +22,18 @@ $taskId = $_POST['task_id'] ?? null;
 
 if (!$taskId) {
     http_response_code(400);
-    echo json_encode(['error' => 'Missing task_id parameter']);
+    echo json_encode(['error' => 'ID tâche manquant']);
     exit();
 }
 
-if ($admin->deleteTask($taskId)) {
-    echo json_encode(['success' => true]);
-} else {
+try {
+    if ($admin->deleteTask($taskId)) {
+        echo json_encode(['success' => true]);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Échec de la suppression de la tâche']);
+    }
+} catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['error' => 'Failed to delete task']);
+    echo json_encode(['error' => $e->getMessage()]);
 } 
