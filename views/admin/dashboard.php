@@ -333,13 +333,16 @@ $messages = $admin->getAllMessages();
             $('.delete-task').click(function() {
                 if (confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')) {
                     const taskId = $(this).data('task-id');
+                    const $row = $(this).closest('tr');
                     
                     $.post('/pfe/api/admin/delete_task.php', {
                         task_id: taskId
                     })
                     .done(function(response) {
                         if (response.success) {
-                            location.reload();
+                            $row.fadeOut(400, function() {
+                                $(this).remove();
+                            });
                         } else {
                             alert('Erreur lors de la suppression de la tâche');
                         }
@@ -359,11 +362,14 @@ $messages = $admin->getAllMessages();
                     $.post('/pfe/api/admin/delete_message.php', {
                         message_id: messageId
                     })
-                    .done(function() {
-                        // Instead of reloading the page, just remove the row
-                        $row.fadeOut(400, function() {
-                            $(this).remove();
-                        });
+                    .done(function(response) {
+                        if (response.success) {
+                            $row.fadeOut(400, function() {
+                                $(this).remove();
+                            });
+                        } else {
+                            alert('Failed to delete message');
+                        }
                     })
                     .fail(function() {
                         alert('Failed to delete message');
