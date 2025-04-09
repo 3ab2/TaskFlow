@@ -8,6 +8,7 @@ require_once "config/database.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/pfe/assets/images/gdt.png" type="image/x-icon">
     <title>Support - TaskFlow</title>
 
 
@@ -21,7 +22,7 @@ require_once "config/database.php";
 <body>
     <?php include 'includes/navbar.php'; ?>
 
-    <section class="support container py-5">
+    <section class="support container py-5 mt-5">
         <?php if (isset($_SESSION['success'])): ?>
             <div class="alert alert-success">
                 <?php
@@ -39,7 +40,7 @@ require_once "config/database.php";
             </div>
         <?php endif; ?>
 
-        <h1 class="text-center mb-4">Centre de Support</h1>
+        <h2 class="text-center mb-4">Centre de Support</h2>
         <p class="text-center">Besoin d'aide ? Contactez-nous via le formulaire ci-dessous ou consultez notre <a
                 href="/pfe/FAQ.php">FAQ</a>.</p>
 

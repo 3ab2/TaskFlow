@@ -20,6 +20,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/pfe/assets/images/gdt.png" type="image/x-icon">
     <title>Tableau de bord - TaskManager</title>
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
     <link rel="stylesheet" href="/pfe/assets/css/home.css">
