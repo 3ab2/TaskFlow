@@ -16,7 +16,7 @@
     <?php include "../includes/navbar.php"; ?>
 
     <!-- Hero Section -->
-    <section class="hero text-center text-white py-5" style="background: linear-gradient(135deg,rgba(72, 38, 174, 0.82), #2c3e50);">
+    <section class="hero text-center text-white py-5 mt-5" style="background: linear-gradient(135deg,rgba(72, 38, 174, 0.82), #2c3e50);">
         <div class="container">
             <h1 class="display-4">Optimisez votre productivité avec TaskFlow</h1>
             <p class="lead">Gérez vos tâches efficacement et collaborez en toute simplicité.</p>
@@ -31,7 +31,7 @@
                 <div class="card p-4 text-center shadow-sm">
                     <i class="fas fa-chart-line fa-3x text-primary"></i>
                     <h4 class="mt-3">Tableau de bord</h4>
-                    <p>Suivez vos tâches et votre progression grâce à un tableau de bord clair et interactif.</p>
+                    <p>Suivez vos tâches grâce à un tableau de bord clair et interactif.</p>
                     <a href="/pfe/views/dashboard.php" class="btn btn-primary">Accéder</a>
                 </div>
             </div>

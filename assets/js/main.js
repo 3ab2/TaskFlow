@@ -139,4 +139,18 @@ document.addEventListener('DOMContentLoaded', function() {
             toast.remove();
         });
     }
+
+    // Animation pour les cartes de tarification
+    const premiumCards = document.querySelectorAll('.premium-card');
+    
+    premiumCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
 });

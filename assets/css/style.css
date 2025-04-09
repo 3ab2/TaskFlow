@@ -37,6 +37,9 @@ body {
     background-color: var(--primary-bg);
     color: var(--text-color);
     transition: all 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Cartes et conteneurs */
@@ -282,8 +285,8 @@ body {
 .btn-custom:hover {
     transform: translateY(-1px);
 }
-canvas{
 
+canvas{
     background-color: var(--card-bg);
     border-color: var(--border-color);
     border: 1px solid var(--border-color);
@@ -355,4 +358,39 @@ canvas{
     .social-links {
         justify-content: center;
     }
+}
+
+/* Styles pour les cartes de tarification */
+.premium-card {
+    border: 2px solid #ffc107;
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+}
+
+.premium-card .card-header {
+    background-color: #ffc107;
+    color: #000;
+}
+
+/* Badge Premium */
+.badge-premium {
+    background-color: #ffc107;
+    color: #000;
+}
+
+/* Animation pour les boutons Premium */
+.btn-premium {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Styles pour la page de succès */
+.success-icon {
+    font-size: 4rem;
+    color: #28a745;
+    margin-bottom: 1rem;
 }

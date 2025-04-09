@@ -138,7 +138,7 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 
-<body style="margin-top: 10px;">
+<body style="margin-top: 20px;">
     <?php include '../includes/navbar.php'; ?>
 
     <div class="container mt-5" >

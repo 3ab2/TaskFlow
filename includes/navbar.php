@@ -123,7 +123,11 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <i class="fas fa-cog me-2"></i> Paramètres
                                 </a>
                             </li>
-
+                            <li>
+                                <a class="dropdown-item" href="/pfe/views/pricing.php">
+                                    <i class="fas fa-crown me-2"></i> Upgrade
+                                </a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -138,7 +142,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
         </div>
     </div>
-</nav>>
+</nav>
 <div class="container">
     <a class="navbar-brand" href="/pfe/index.php">
         <i class="fas fa-tasks"></i> TaskFlow

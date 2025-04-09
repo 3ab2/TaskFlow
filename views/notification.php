@@ -44,10 +44,10 @@ if (!empty($notifications)) {
     </style>
 </head>
 
-<body>
+<body  style="margin-top: 20px;">
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-    <div class="container mt-5" style="margin-top: 10px;">
+    <div class="container mt-5">
         <h2>Notifications</h2>
         <p>Cette page contient les notifications envoyées par l'equipe de support.</p>
 

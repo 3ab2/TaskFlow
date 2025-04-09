@@ -9,7 +9,7 @@ class AuthController {
     }
 
     public function getUserByEmail($email) {
-        $stmt = $this->db->prepare("SELECT id, username, email, password, status, role FROM users WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT id, username, email, password, status, role, plan FROM users WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -49,7 +49,7 @@ class AuthController {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insérer l'utilisateur
-        $stmt = $this->db->prepare("INSERT INTO users (username, email, password, status, role) VALUES (?, ?, ?, 'available', 'user')");
+        $stmt = $this->db->prepare("INSERT INTO users (username, email, password, status, role, plan) VALUES (?, ?, ?, 'available', 'user', 'free')");
         
         if ($stmt->execute([$username, $email, $hashed_password])) {
             return [
@@ -77,7 +77,7 @@ class AuthController {
         }
 
         // Vérifier les identifiants
-        $stmt = $this->db->prepare("SELECT id, username, email, password, status, role FROM users WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT id, username, email, password, status, role, plan FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -89,6 +89,7 @@ class AuthController {
             $_SESSION['email'] = $user['email'];
             $_SESSION['status'] = $user['status'];
             $_SESSION['role'] = $user['role'];
+            $_SESSION['plan'] = $user['plan'] ?? 'free'; // Ajout du plan avec une valeur par défaut
 
             return [
                 'success' => true,
@@ -105,7 +106,7 @@ class AuthController {
     public function logout() {
         session_start();
         session_destroy();
-        header('Location: /pfe/index.php');
+        header('Location: /pfe/views/auth/login.php');
         exit();
     }
 }

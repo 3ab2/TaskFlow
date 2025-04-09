@@ -59,10 +59,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </style>
 </head>
 
-<body>
+<body  style="margin-top: 10px;">
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="profile-header mt-4">
+    <div class="profile-header mt-5">
         <div class="container text-center">
             <img src="../assets/images/compte-dutilisateur.png"
                 alt="Photo de profil" class="profile-picture mb-4">
