@@ -14,56 +14,72 @@ try {
     $database = new Database();
     $db = $database->getConnection();
 
-    // Récupérer les données du formulaire
-    $username = $_POST['username'] ?? null;
-    $email = $_POST['email'] ?? null;
-    $new_password = $_POST['new_password'] ?? null;
+    $user_id = $_SESSION['user_id'];
+    $updates = [];
+    $params = [];
 
-    // Validation des données
-    if (empty($username) || empty($email)) {
-        throw new Exception('Le nom d\'utilisateur et l\'email sont requis');
+    // Traitement de la photo de profil
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = '../uploads/profile/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileExtension = strtolower(pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION));
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        
+        if (!in_array($fileExtension, $allowedExtensions)) {
+            throw new Exception('Format de fichier non supporté. Formats acceptés : JPG, JPEG, PNG, GIF, WebP');
+        }
+
+        if ($_FILES['profile_picture']['size'] > 2 * 1024 * 1024) {
+            throw new Exception('La taille du fichier ne doit pas dépasser 2MB');
+        }
+
+        $fileName = uniqid() . '.' . $fileExtension;
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetPath)) {
+            $updates[] = "profile_picture = ?";
+            $params[] = $fileName;
+        }
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        throw new Exception('Format d\'email invalide');
+    // Traitement des autres champs
+    if (!empty($_POST['username'])) {
+        $updates[] = "username = ?";
+        $params[] = $_POST['username'];
     }
 
-    // Vérifier si l'email existe déjà pour un autre utilisateur
-    $stmt = $db->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
-    $stmt->execute([$email, $_SESSION['user_id']]);
-    if ($stmt->fetch()) {
-        throw new Exception('Cet email est déjà utilisé');
+    if (!empty($_POST['email'])) {
+        $updates[] = "email = ?";
+        $params[] = $_POST['email'];
     }
 
-    // Construire la requête de mise à jour
-    $updateFields = ['username = ?', 'email = ?'];
-    $params = [$username, $email];
-
-    // Ajouter le mot de passe s'il est fourni
-    if (!empty($new_password)) {
-        $updateFields[] = 'password = ?';
-        $params[] = password_hash($new_password, PASSWORD_DEFAULT);
+    if (!empty($_POST['new_password'])) {
+        if ($_POST['new_password'] === $_POST['confirm_password']) {
+            $updates[] = "password = ?";
+            $params[] = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+        } else {
+            throw new Exception('Les mots de passe ne correspondent pas');
+        }
     }
 
-    $params[] = $_SESSION['user_id'];
-
-    // Mettre à jour l'utilisateur
-    $query = "UPDATE users SET " . implode(', ', $updateFields) . " WHERE id = ?";
-    $stmt = $db->prepare($query);
-    $success = $stmt->execute($params);
-
-    if ($success) {
-        // Mettre à jour la session
-        $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
-
-        echo json_encode([
-            'success' => true,
-            'message' => 'Profil mis à jour avec succès'
-        ]);
-    } else {
-        throw new Exception('Erreur lors de la mise à jour du profil');
+    if (!empty($updates)) {
+        $params[] = $user_id;
+        $sql = "UPDATE users SET " . implode(", ", $updates) . " WHERE id = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
     }
+
+    // Mettre à jour la session
+    $_SESSION['username'] = $_POST['username'] ?? null;
+    $_SESSION['email'] = $_POST['email'] ?? null;
+
+    echo json_encode([
+        'success' => true,
+        'message' => 'Profil mis à jour avec succès'
+    ]);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode([

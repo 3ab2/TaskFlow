@@ -121,7 +121,7 @@ require_once "config/database.php";
                         <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
 
                         <li><a href="FAQ.php">FAQ</a></li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="/pfe/support.php">Support</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 footer-section">
@@ -134,7 +134,7 @@ require_once "config/database.php";
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2021 - <?php echo date('Y '); ?> TaskFlow. Tous droits réservés.</p>
+                <p>&copy; 2021 - <?php echo date('Y '); ?> <strong>TaskFlow</strong>. Tous droits réservés.</p>
             </div>
         </div>
     </footer>

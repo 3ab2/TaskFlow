@@ -20,6 +20,7 @@ $hasSubscription = isset($_SESSION['subscription_status']) && $_SESSION['subscri
     <link rel="stylesheet" href="/pfe/assets/css/dashboard.css">
     <style>
         .pricing-card {
+            position: relative;
             transition: transform 0.3s;
             border-radius: 10px;
             overflow: hidden;
@@ -61,6 +62,17 @@ $hasSubscription = isset($_SESSION['subscription_status']) && $_SESSION['subscri
             padding: 0.75rem;
             font-weight: bold;
         }
+        .recommended-badge {
+            position: absolute;
+            top: 34px;
+            right: 0px;
+            background: #FFD700;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 0 10px 0 10px;
+            font-weight: bold;
+            transform: translateY(-100%);
+        }
     </style>
 </head>
 <body>
@@ -93,6 +105,7 @@ $hasSubscription = isset($_SESSION['subscription_status']) && $_SESSION['subscri
             <!-- Premium Plan -->
             <div class="col-md-4 mb-4">
                 <div class="pricing-card h-100">
+                    <div class="recommended-badge">Recommandé</div>
                     <div class="pricing-header">
                         <h3>Premium</h3>
                     </div>

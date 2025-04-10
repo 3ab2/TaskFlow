@@ -65,7 +65,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     <div class="profile-header mt-5">
         <div class="container text-center">
-            <img src="../assets/images/compte-dutilisateur.png"
+            <img src="<?php echo !empty($user['profile_picture']) ? '../uploads/profile/' . htmlspecialchars($user['profile_picture']) : '../assets/images/compte-dutilisateur.png'; ?>"
                 alt="Photo de profil" class="profile-picture mb-4">
             <h2><?php echo htmlspecialchars($user['username']); ?></h2>
             <p class="mb-0"><?php echo htmlspecialchars($user['email']); ?></p>
@@ -96,6 +96,11 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label class="form-label">Confirmer le mot de passe</label>
                                 <input type="password" class="form-control" name="confirm_password">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Photo de profil</label>
+                                <input type="file" class="form-control" name="profile_picture" accept="image/*">
+                                <small class="text-muted">Formats acceptés : JPG, PNG, GIF, WebP. Taille maximale : 2MB</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Mettre à jour</button>
                         </form>
@@ -218,6 +223,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         } else {
         alert(data.message || 'Erreur lors de la mise à jour du profil');
         }
+        })
+        .catch(error => {
+        console.error('Error:', error);
+        alert('Une erreur est survenue lors de la mise à jour du profil');
         });
         });
         });
