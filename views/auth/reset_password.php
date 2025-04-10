@@ -25,11 +25,24 @@ session_start();
             <p class="text-center">Entrez votre adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.</p>
 
             <?php if (isset($_SESSION['message'])): ?>
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" >
+                    <i class="fas fa-check-circle me-2"></i>
                     <?php
                     echo $_SESSION['message'];
                     unset($_SESSION['message']);
                     ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="width: 100%;">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <?php
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                    ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
 
