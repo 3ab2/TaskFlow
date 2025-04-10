@@ -18,13 +18,16 @@
     <?php include "../includes/navbar.php"; ?>
 
     <!-- Hero Section -->
-    <section class="hero text-center text-white py-5 mt-5" style="background: linear-gradient(135deg,rgba(72, 38, 174, 0.82), #2c3e50);">
+    <section class="hero text-center text-white py-5 mt-5" style="background: linear-gradient(135deg, rgba(72, 38, 174, 0.82), #2c3e50);">
         <div class="container">
             <h1 class="display-4">Optimisez votre productivité avec TaskFlow</h1>
             <p class="lead">Gérez vos tâches efficacement et collaborez en toute simplicité.</p>
-            <a href="/pfe/views/dashboard.php" class="btn btn-light btn-lg mt-3">Commencer maintenant</a>
+            <div class="alert  " data-aos="fade-up" data-aos-delay="400">
+                <a href="http://localhost/pfe/views/auth/register.php" class="btn btn-light btn-lg mt-3">Commencer maintenant</a>
+            </div>
         </div>
     </section>
+
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Comment utiliser notre site ?</h2>

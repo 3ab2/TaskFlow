@@ -25,19 +25,22 @@ require_once "config/database.php";
             <div class="row align-items-center">
                 <div class="col-lg-6 animate-fadeInUp">
                     <h1>Gérez vos tâches efficacement avec TaskFlow</h1>
-                    <p>Une solution moderne et intuitive pour organiser votre travail, suivre vos progrès et atteindre
-                        vos objectifs.</p>
-                    <?php if (!isset($_SESSION['user_id'])): ?>
+                    <p>TaskFlow est une solution de gestion des tâches qui vous permet de structurer vos projets de manière organisée et efficace. Grâce à son interface intuitive, vous pouvez facilement suivre l'avancement de vos tâches, collaborer avec votre équipe, et visualiser vos progrès en temps réel. Que vous travailliez sur un projet personnel ou professionnel, TaskFlow vous aide à rester concentré et à atteindre vos objectifs plus rapidement.</p>
+                   <div class="alert">
+                   <?php if (!isset($_SESSION['user_id'])): ?>
                         <div class="d-flex gap-3">
-                            <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg">Commencer gratuitement</a>
-                            <a href="/pfe/views/auth/login.php" class="btn btn-outline-light btn-lg">Aller se connecter</a>
+                            <div>
+                            <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg">S'inscrire</a>
+                            <a href="/pfe/views/auth/login.php" class="btn btn-outline-light btn-lg">Se connecter</a>
+                            </div>
                         </div>
                     <?php else: ?>
                         <a href="/pfe/views/dashboard.php" class="btn btn-light btn-lg">Accéder au tableau de bord</a>
                     <?php endif; ?>
+                   </div>
                 </div>
                 <div class="col-lg-6 d-none d-lg-block">
-                    <img src="/pfe/assets/images/hero-illustration.svg" alt="TaskFlow Illustration" class="img-fluid">
+                    <img src="/pfe/assets/images/taches.png" alt="TaskFlow Illustration" class="img-fluid" >
                 </div>
             </div>
         </div>
