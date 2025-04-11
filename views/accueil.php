@@ -22,7 +22,7 @@
         <div class="container">
             <h1 class="display-4">Optimisez votre productivité avec TaskFlow</h1>
             <p class="lead">Gérez vos tâches efficacement et collaborez en toute simplicité.</p>
-            <div class="alert  " data-aos="fade-up" data-aos-delay="400">
+            <div class="alert" data-aos="fade-up" data-aos-delay="300">
                 <a href="http://localhost/pfe/views/auth/register.php" class="btn btn-light btn-lg mt-3">Commencer maintenant</a>
             </div>
         </div>

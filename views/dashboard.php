@@ -64,9 +64,15 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
         <div class="d-flex justify-content-between align-items-center mb-4 mx-3"
             style=" border-radius: 10px; padding: 5px; z-index: 10;">
             <h2> Mes tâches</h2>
-            <button id="addTaskBtn" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Nouvelle tâche
-            </button>
+            <div style="display: flex; gap: 10px;">
+                <a href="/pfe/views/calendar.php" class="btn btn-primary" >
+                    <i class="fas fa-calendar-alt"></i> Voir le calendrier
+                </a>
+              
+                <button id="addTaskBtn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nouvelle tâche
+                </button>
+            </div>
         </div>
     </div>
 

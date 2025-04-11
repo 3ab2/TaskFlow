@@ -38,6 +38,11 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
+                        <a class="nav-link" href="/pfe/views/calendar.php">
+                            <i class="fas fa-calendar"></i> Calendrier
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link position-relative" href="/pfe/views/messages.php">
                             <i class="fas fa-comments"></i> Messagerie
                             <?php
