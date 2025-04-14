@@ -56,13 +56,13 @@ session_start();
 
                         <div class="mb-5"></div> 
 
-                        <button type="submit" class="btn btn-primary w-100 mb-3"><i class="fas fa-paper-plane me-2"></i>Envoyer le lien de réinitialisation</button>
+                        <button type="submit" class="btn btn-primary w-100 mb-3"><i class="fas fa-paper-plane me-2"></i>Envoyer </button>
                     </form>
                 </div>
             </div>
 
             <div class="text-center">
-                <p class="mb-0">Retour à la <a href="login.php" class="text-primary"><i class="fas fa-sign-in-alt me-2"></i>page de connexion</a></p>
+                <p class="mb-0">Retour à la <a href="login.php" class="text-primary">page de connexion</a></p>
             </div>
         </div>
     </div>

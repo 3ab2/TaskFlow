@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include '../../includes/navbar.php'; ?>
 
-    <div class="register-container mt-5">
+    <div class="register-container"  style="margin-top: 100px;">
         <div class="card register-card">
             <div class="register-header">
                 <i class="fas fa-user-plus"></i>
