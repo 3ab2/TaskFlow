@@ -78,8 +78,8 @@ $hasSubscription = isset($_SESSION['subscription_status']) && $_SESSION['subscri
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <main class="container py-5 mt-5">
-        <h2 class="text-center mb-5">Nos Offres d'Abonnement</h2>
+    <main class="container py-5 " style="margin-top: 70px;">
+        <h2 class="text-center mb-5"  style="font-family: 'Courier New', Courier, monospace;">Nos Offres d'Abonnement</h2>
         
         <div class="row">
             <!-- Free Plan -->

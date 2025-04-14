@@ -48,8 +48,8 @@ if (!empty($notifications)) {
 <body  style="margin-top: 20px;">
     <?php include __DIR__ . '/../includes/navbar.php'; ?>
 
-    <div class="container mt-5">
-        <h2>Notifications</h2>
+    <div class="container " style="margin-top: 100px;">
+        <h2  style="font-family: 'Courier New', Courier, monospace;">Notifications</h2>
         <p>Cette page contient les notifications envoyées par l'equipe de support.</p>
 
         <?php if (empty($notifications)): ?>

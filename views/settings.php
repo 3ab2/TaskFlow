@@ -1,6 +1,4 @@
-<?php
 
-?>
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
@@ -31,8 +29,8 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="container py-3 py-md-5 mt-4">
-        <h2 class="mb-4 text-center text-md-start">Paramètres</h2>
+    <div class="container py-3 py-md-5 " style="margin-top: 80px;">
+        <h2 class="mb-4 text-center text-center"  style="font-family: 'Courier New', Courier, monospace;">Paramètres</h2>
 
         <div class="row">
             <div class="col-12">

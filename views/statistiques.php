@@ -115,8 +115,8 @@ if ($total == 0) {
 <body>
     <?php include "../includes/navbar.php"; ?>
 
-    <div class="container py-4 mt-5 " style="margin-top: 10px;">
-        <h2 class="text-center mb-4"> Statistiques </h2>
+    <div class="container py-4 "  style="margin-top: 100px;">
+        <h2 class="text-center mb-4"  style="font-family: 'Courier New', Courier, monospace;"> Statistiques </h2>
         <p class="text-center mb-4">Suivez vos tâches et votre progression en temps reel.</p>
 
         <!-- Message d'encouragement conditionnel -->

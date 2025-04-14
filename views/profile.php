@@ -63,7 +63,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 <body  style="margin-top: 10px;">
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="profile-header mt-5">
+    <div class="profile-header "  style="margin-top: 78px;">
         <div class="container text-center">
             <img src="<?php echo !empty($user['profile_picture']) ? '../uploads/profile/' . htmlspecialchars($user['profile_picture']) : '../assets/images/compte-dutilisateur.png'; ?>"
                 alt="Photo de profil" class="profile-picture mb-4">
