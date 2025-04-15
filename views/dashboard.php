@@ -80,7 +80,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 
     <div class="row mx-3">
         <div class="col-md-4 tache-a-faire">
-            <div style="background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; text-align: center; margin-bottom:-10px;">
+            <div style="background: rgba(206, 12, 12, 0.3); border-radius: 10px; padding: 10px; text-align: center; margin-bottom:-10px;">
                 <h5 style="display: inline-block; margin:0 auto;"><i class="fas fa-list" style="color:red;"></i> &nbsp; À faire</h5>
             </div>
 
@@ -118,7 +118,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 
         <div class="col-md-4 tahe-en-cours">
 
-            <div style="background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 10px;">
+            <div style="background: rgba(220, 248, 8, 0.33); border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 10px;">
                 <h5 style="display: inline-block; margin: 0 auto;"><i class="fas fa-spinner" style="color:rgb(255, 225, 0);"></i>&nbsp; En cours</h5>
 
             </div>
@@ -152,7 +152,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
         </div>
 
         <div class="col-md-4 tache-terminer">
-            <div style="background: rgba(255, 255, 255, 0.5); border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 10px;">
+            <div style="background: rgba(4, 251, 66, 0.34); border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 10px;">
                 <h5 style="display: inline-block; margin: 0 auto;"><i class="fas fa-check" style="color:green;"></i>&nbsp; Terminées</h5>
 
             </div>

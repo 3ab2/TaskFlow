@@ -29,8 +29,8 @@ require_once "config/database.php";
                    <div class="alert">
                    <?php if (!isset($_SESSION['user_id'])): ?>
                         <div class="d-flex gap-3">
-                            <div>
-                            <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg">S'inscrire</a>
+                            <div class="d-flex gap-3">
+                            <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg">Commencer gratuitement </a>
                             <a href="/pfe/views/auth/login.php" class="btn btn-outline-light btn-lg">Se connecter</a>
                             </div>
                         </div>
