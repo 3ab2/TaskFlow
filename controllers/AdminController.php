@@ -47,6 +47,14 @@ class AdminController {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getAllNotifications() {
+        if (!$this->isAdmin()) {
+            return ['error' => 'Unauthorized access'];
+        }
+        $stmt = $this->db->query("SELECT notifications.*, users.username FROM notifications JOIN users ON notifications.user_id = users.id");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function updateUserRole($userId, $newRole) {
         if (!$this->isAdmin()) {
             return ['error' => 'Unauthorized access'];
@@ -723,3 +731,4 @@ class AdminController {
         ];
     }
 }
+

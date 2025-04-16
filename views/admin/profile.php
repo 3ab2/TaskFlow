@@ -45,9 +45,7 @@ $preferences = $admin->getAdminPreferences();
                                 data-bs-toggle="list">
                                 <i class="fas fa-history me-2"></i>Historique
                             </a>
-                            <a href="#settings" class="list-group-item list-group-item-action" data-bs-toggle="list">
-                                <i class="fas fa-cog me-2"></i>Paramètres
-                            </a>
+                           
                             <a href="/pfe/controllers/logout.php"
                                 class="list-group-item list-group-item-action text-danger">
                                 <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
@@ -144,51 +142,10 @@ $preferences = $admin->getAdminPreferences();
                             </div>
                         </div>
                     </div>
-
-                    <!-- Paramètres -->
-                    <div class="tab-pane fade fade-in" id="settings">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="mb-0 text-primary">
-                                    <i class="fas fa-cog me-2"></i>Paramètres
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <form id="settingsForm">
-                                    <div class="mb-3">
-                                        <label class="form-label">Langue</label>
-                                        <select class="form-select" name="language">
-                                            <option value="fr" <?php echo $preferences['language'] === 'fr' ? 'selected' : ''; ?>>Français</option>
-                                            <option value="en" <?php echo $preferences['language'] === 'en' ? 'selected' : ''; ?>>English</option>
-                                            <option value="ar" <?php echo $preferences['language'] === 'ar' ? 'selected' : ''; ?>>العربية</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Thème</label>
-                                        <select class="form-select" name="theme">
-                                            <option value="light" <?php echo $preferences['theme'] === 'light' ? 'selected' : ''; ?>>Clair</option>
-                                            <option value="dark" <?php echo $preferences['theme'] === 'dark' ? 'selected' : ''; ?>>Sombre</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="form-check form-switch">
-
-                                            <input class="form-check-input" type="checkbox" name="notifications"
-                                                id="notifications" <?php echo isset($preferences['notifications']) && $preferences['notifications'] ? 'checked' : ''; ?>>
-
-                                            <label class="form-check-label" for="notifications">Notifications</label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i>Enregistrer les paramètres
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
