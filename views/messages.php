@@ -45,97 +45,152 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/pfe/assets/css/style.css">
     <style>
-        .message-actions {
-            display: none;
-        }
+       /* Style moderne pour la zone d'affichage des messages */
+.chat-box {
+   
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
 
-        .alert:hover .message-actions {
-            display: block;
-            cursor: pointer;
-        }
+.chat-box:hover {
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
 
-        /* Nouveau style moderne pour les messages */
-        .chat-box {
-            background: rgba(133, 207, 170, 0.35);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+.alert {
+    border: none;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    max-width: 75%;
+    backdrop-filter: blur(5px);
+}
 
-        .alert {
-            border:none;
-            border-bottom: 1px solid rgb(22, 198, 60);
-            border-right: 1px solid rgb(22, 198, 60);
-            border-radius: 60px 60px 60px 0px;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            max-width: 80%;
-        }
+.alert-primary {
+    background: linear-gradient(135deg, #4776E6, #8E54E9);
+    color: white;
+    border-radius: 18px 18px 0px 18px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
-        .alert:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+.alert-info {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+    color: white;
+    border-radius: 18px 18px 18px 0px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
-        .alert-primary {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-        }
+.alert:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
 
-        .alert-info {
-            background: linear-gradient(135deg,rgb(108, 125, 120),rgb(154, 217, 199));
-            color: white;
-        }
+.alert i.fas.fa-user-circle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
 
-        .message-actions {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+.alert small.text-muted {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    opacity: 0.9;
+}
 
-        .alert:hover .message-actions {
-            opacity: 1;
-        }
+.alert p.mb-0 {
+    margin-top: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
 
-        .message-actions .btn {
-            color: white;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            height: 30px;
-            width: 30px;
-            padding: 5px 10px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
+.message-actions {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
 
-        .message-actions .btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
+.alert:hover .message-actions {
+    opacity: 1;
+    transform: translateX(0);
+}
 
-        .text-muted {
-            font-size: 0.8rem;
-            opacity: 0.8;
-           
-        }
+.message-actions .btn {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(3px);
+}
 
-        .input-group {
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+.message-actions .btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.15);
+}
 
-        .input-group input {
-            border: none;
-            padding: 15px 20px;
-        }
+.message-actions .btn i {
+    font-size: 0.9rem;
+}
 
-        .input-group .btn {
-            border-radius: 0 25px 25px 0;
-            padding: 15px 25px;
-        }
+/* Animation pour les nouveaux messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Style pour la scrollbar de la zone de chat */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* Style pour le lien de profil utilisateur */
+.username-link {
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.username-link:hover {
+    text-decoration: underline;
+    opacity: 0.85;
+}
+
+
+
+
     </style>
 </head>
 
@@ -156,10 +211,12 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             class="d-flex <?php echo ($message['user_id'] == $user_id) ? 'justify-content-end' : 'justify-content-start'; ?>">
                             <div class="alert <?php echo ($message['user_id'] == $user_id) ? 'alert-primary' : 'alert-info'; ?> w-75 ">
                                 <i class="fas fa-user-circle me-2"></i>
-                                <small class="text-muted"
-                                    style="color: <?= '#' . substr(md5($message['username']), 0, 6); ?>; font-weight: bold;"><?= htmlspecialchars($message['username']); ?>
-                                    
-                                   </small> <i style="color: rgb(0, 0, 0, 0.5); font-size: 0.7rem;">  <?= date('l  H:i', strtotime($message['created_at'])); ?></i>
+                                <a href="/pfe/views/user_profile.php?id=<?= $message['user_id']; ?>" class="username-link" 
+                                   style="color: <?= '#' . substr(md5($message['username']), 0, 6); ?>;">
+                                    <?= htmlspecialchars($message['username']); ?>
+                                   
+                                </a>
+                                <i style="color: rgb(0, 0, 0, 0.5); font-size: 0.7rem;">  <?= date('l  H:i', strtotime($message['created_at'])); ?></i>
 
                                 <p class="mb-0"><?= nl2br(htmlspecialchars($message['content'])); ?></p>
                                 <div class="message-actions" style="position: relative;">
@@ -174,8 +231,6 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         </div>
                                     <?php endif; ?>
                                 </div>
-
-
                             </div>
                         </div>
                     <?php endforeach; ?>

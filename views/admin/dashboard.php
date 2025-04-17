@@ -132,7 +132,6 @@ $messages = $admin->getAllMessages();
         #adminTabs {
             background-color: rgba(255, 255, 255, 0.0);
         }
-
     </style>
 </head>
 
@@ -144,9 +143,10 @@ $messages = $admin->getAllMessages();
             <div class="col-12">
                 <div class="card fade-in">
                     <div class="card-header">
-                        
-                       
-                        <ul class="nav nav-tabs  d-flex align-items-center justify-content-around" id="adminTabs" role="tablist">
+
+
+                        <ul class="nav nav-tabs  d-flex align-items-center justify-content-around" id="adminTabs"
+                            role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="users-tab" data-bs-toggle="tab" href="#users" role="tab">
                                     <i class="fas fa-user me-2"></i>Users
@@ -440,19 +440,37 @@ $messages = $admin->getAllMessages();
             $('.role-select').change(function () {
                 const userId = $(this).data('id');
                 const newRole = $(this).val();
+                const $select = $(this); // Store reference to the select element
+
+                // Show loading indicator
+                $select.prop('disabled', true);
 
                 $.post('/pfe/api/admin/update_role.php', {
                     user_id: userId,
                     role: newRole
                 })
                     .done(function (response) {
-                        showToast('Success', 'Role updated successfully', 'success');
+                        // Parse the response if it's a string
+                        const result = typeof response === 'string' ? JSON.parse(response) : response;
+
+                        if (result.success) {
+                            showToast('Success', 'Role updated successfully', 'success');
+                        } else {
+                            // If update failed, revert the select to its previous value
+                            $select.val(result.currentRole || ($select.val() === 'admin' ? 'user' : 'admin'));
+                            showToast('Error', result.message || 'Failed to update role', 'danger');
+                        }
                     })
-                    .fail(function () {
-                        showToast('Error', 'Failed to update role', 'danger');
+                    .fail(function (xhr) {
+                        // On failure, revert the select to its previous value
+                        $select.val($select.val() === 'admin' ? 'user' : 'admin');
+                        showToast('Error', 'Failed to update role: Server error', 'danger');
+                    })
+                    .always(function () {
+                        // Re-enable the select
+                        $select.prop('disabled', false);
                     });
             });
-
             // Delete user
             $('.delete-user').click(function () {
                 if (confirm('Are you sure you want to delete this user?')) {

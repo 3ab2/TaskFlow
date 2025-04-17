@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <div class="container mt-5">
+    <div class="container " style="margin-top: 100px;">
 
         <h4 class="text-center"><i class="fas fa-edit me-2"></i> Vous pouvez modifier votre Message ici</h4>
         <form action="" method="POST">

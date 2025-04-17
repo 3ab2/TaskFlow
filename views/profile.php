@@ -60,7 +60,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </style>
 </head>
 
-<body  style="margin-top: 10px;">
+<body >
     <?php include '../includes/navbar.php'; ?>
 
     <div class="profile-header "  style="margin-top: 78px;">

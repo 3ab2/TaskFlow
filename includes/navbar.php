@@ -3,15 +3,181 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+
+<style>
+    /* Styles existants conservés */
+    .navbar {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        padding: 1rem 0;
+    }
+
+    /* Nouveaux styles pour le logo et le nom */
+    .logo-container {
+        position: relative;
+        overflow: visible;
+        padding: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .logo-container:hover {
+        transform: scale(1.05);
+    }
+
+    .logo-wrapper {
+        position: relative;
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-image {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
+        z-index: 2;
+        animation: pulse-logo 3s infinite ease-in-out;
+    }
+
+    .logo-glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgb(255, 225, 0) 0%, rgba(255, 255, 255, 0) 70%);
+        border-radius: 50%;
+        filter: blur(5px);
+        opacity: 0.7;
+        z-index: 1;
+        animation: glow 3s infinite ease-in-out;
+    }
+
+    .brand-text {
+        font-weight: 700;
+        font-size: 1.4rem;
+        letter-spacing: -0.5px;
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        z-index: 2;
+    }
+
+    .task {
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        animation: slide-in 0.5s ease-out;
+    }
+
+    .flow {
+        background: linear-gradient(90deg, #ffffff, #a5b4fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+        animation: slide-in 0.5s ease-out 0.2s both;
+    }
+
+    .flow::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0), #ffffff, rgba(255, 255, 255, 0));
+        animation: slide-glow 2s infinite;
+    }
+
+    @keyframes pulse-logo {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+    @keyframes glow {
+
+        0%,
+        100% {
+            opacity: 0.3;
+            transform: scale(0.8);
+        }
+
+        50% {
+            opacity: 0.7;
+            transform: scale(1.1);
+        }
+    }
+
+    @keyframes slide-in {
+        0% {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-glow {
+
+        0%,
+        100% {
+            transform: translateX(-100%);
+        }
+
+        50% {
+            transform: translateX(100%);
+        }
+    }
+
+    /* Animation lors du chargement de la page */
+    @keyframes appear {
+        0% {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .navbar-brand {
+        animation: appear 0.8s ease-out;
+    }
+    
+</style>
+
+
+
+
+
+
+<!-- Mettez à jour le style de la navbar.php pour la partie logo et nom -->
 <nav class="navbar navbar-expand-lg fixed-top d-inline-block align-top mb-5"
     style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
 
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="/pfe/index.php">
-            <img src="/pfe/assets/images/gdt.png" width="35" height="35" class="d-inline-block align-top "
-                alt="Logo de TaskFlow">
-            <strong><i>TaskFlow</i></strong>
+        <a class="navbar-brand d-flex align-items-center logo-container" href="/pfe/index.php">
+            <div class="logo-wrapper">
+                <img src="/pfe/assets/images/gdt.png" class="logo-image" alt="Logo de TaskFlow">
+                <div class="logo-glow"></div>
+            </div>
+            <div class="brand-text">
+                <span class="task" style="font-family: 'Edu VIC WA NT Hand Arrows', cursive; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-image: linear-gradient(135deg, #ff7f50 0%,rgb(255, 247, 0) 100%);">Task</span>
+                <span class="flow" style="font-family: 'Edu VIC WA NT Hand Arrows', cursive;">Flow</span>
+            </div>
         </a>
+
+        <!-- Le reste du code navbar reste inchangé -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -36,7 +202,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         </a>
                     </li>
                 <?php endif; ?>
-                <?php if (isset($_SESSION['user_id'])): ?> 
+                <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
                         <a class="nav-link position-relative" href="/pfe/views/messages.php">
                             <i class="fas fa-comments"></i> Feedback
@@ -141,10 +307,42 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php endif; ?>
             </div>
         </div>
+
+       
     </div>
 </nav>
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
     // Fonction pour basculer le thème
@@ -200,6 +398,24 @@ if (session_status() === PHP_SESSION_NONE) {
             });
         });
     });
+    // Ajouter un effet de particules autour du logo
+    document.addEventListener('DOMContentLoaded', function () {
+        const logoContainer = document.querySelector('.logo-container');
+
+        // Effet spécial au survol du logo
+        logoContainer.addEventListener('mouseenter', function () {
+            const logoGlow = document.querySelector('.logo-glow');
+            logoGlow.style.animation = 'none';
+            logoGlow.style.opacity = '1';
+            logoGlow.style.transform = 'scale(1.3)';
+
+            setTimeout(() => {
+                logoGlow.style.animation = 'glow 3s infinite ease-in-out';
+                logoGlow.style.opacity = '0.7';
+                logoGlow.style.transform = 'scale(1)';
+            }, 300);
+        });
+    });
 </script>
 
 <style>
@@ -251,7 +467,7 @@ if (session_status() === PHP_SESSION_NONE) {
         align-items: center;
         justify-content: center;
         border: 1px solid white;
-        font-weight:initial;
+        font-weight: initial;
         transform: translate(-50%, -50%);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
@@ -346,7 +562,7 @@ if (session_status() === PHP_SESSION_NONE) {
         border-radius: 9px;
         color: white;
         font-size: 12px;
-        font-weight:initial;
+        font-weight: initial;
         display: flex;
         align-items: center;
         border: 1px solid white;

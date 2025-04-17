@@ -23,7 +23,11 @@
             <h1 class="display-4">Optimisez votre productivité avec TaskFlow</h1>
             <p class="lead">Gérez vos tâches efficacement et collaborez en toute simplicité.</p>
             <div class="alert" data-aos="fade-up" data-aos-delay="300">
-                <a href="http://localhost/pfe/views/auth/register.php" class="btn btn-light btn-lg mt-3">Commencer maintenant</a>
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                    <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg mt-3">Commencer maintenant</a>
+                <?php else: ?>
+                    <a href="/pfe/views/statistiques.php" class="btn btn-light btn-lg mt-3">Voir vos statistiques</a>
+                <?php endif; ?>
             </div>
         </div>
     </section>
