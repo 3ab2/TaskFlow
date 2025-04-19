@@ -11,6 +11,7 @@ if (!$admin->isAdmin()) {
 $users = $admin->getAllUsers();
 $tasks = $admin->getAllTasks();
 $messages = $admin->getAllMessages();
+$notifications = $admin->getAllNotifications();
 ?>
 
 <!DOCTYPE html>
@@ -162,39 +163,16 @@ $messages = $admin->getAllMessages();
                                     <i class="fas fa-envelope me-2"></i>Messages
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notifications" role="tab">
+                                    <i class="fas fa-bell me-2"></i>Notifications
+                                </a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card bg-light mb-3">
-                                    <div class="card-body text-center">
-                                        <h3 class="text-primary"><i
-                                                class="fas fa-users me-2"></i><?php echo count($users); ?></h3>
-                                        <h5>Total Users</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card bg-light mb-3">
-                                    <div class="card-body text-center">
-                                        <h3 class="text-primary"><i
-                                                class="fas fa-tasks me-2"></i><?php echo count($tasks); ?></h3>
-                                        <h5>Total Tasks</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card bg-light mb-3">
-                                    <div class="card-body text-center">
-                                        <h3 class="text-primary"><i
-                                                class="fas fa-envelope me-2"></i><?php echo count($messages); ?></h3>
-                                        <h5>Total Messages</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
+                   
                 </div>
             </div>
         </div>
@@ -381,6 +359,83 @@ $messages = $admin->getAllMessages();
                     </div>
                 </div>
             </div>
+            <!-- Notifications Tab -->
+            <div class="tab-pane fade fade-in" id="notifications" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0 text-white">Notification Management</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control" id="notificationSearch"
+                                    placeholder="Search notification by ID, title, user or content...">
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>User</th>
+                                        <th>Title</th>
+                                        <th>Message</th>
+                                        <th>Type</th>
+                                        <th>Priority</th>
+                                        <th>Created At</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($notifications as $notification): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($notification['id']); ?></td>
+                                            <td><?php echo htmlspecialchars($notification['username']); ?></td>
+                                            <td>
+                                                <span class="editable" data-type="text" data-id="<?php echo $notification['id']; ?>"
+                                                    data-field="title">
+                                                    <?php echo htmlspecialchars($notification['title']); ?>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="editable" data-type="textarea" data-id="<?php echo $notification['id']; ?>"
+                                                    data-field="message">
+                                                    <?php echo htmlspecialchars($notification['message']); ?>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <select class="form-select form-select-sm type-select"
+                                                    data-id="<?php echo $notification['id']; ?>">
+                                                    <option value="info" <?php echo $notification['type'] === 'info' ? 'selected' : ''; ?>>Info</option>
+                                                    <option value="success" <?php echo $notification['type'] === 'success' ? 'selected' : ''; ?>>Success</option>
+                                                    <option value="warning" <?php echo $notification['type'] === 'warning' ? 'selected' : ''; ?>>Warning</option>
+                                                    <option value="error" <?php echo $notification['type'] === 'error' ? 'selected' : ''; ?>>Error</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="form-select form-select-sm priority-select"
+                                                    data-id="<?php echo $notification['id']; ?>">
+                                                    <option value="low" <?php echo $notification['priority'] === 'low' ? 'selected' : ''; ?>>Low</option>
+                                                    <option value="normal" <?php echo $notification['priority'] === 'normal' ? 'selected' : ''; ?>>Normal</option>
+                                                    <option value="high" <?php echo $notification['priority'] === 'high' ? 'selected' : ''; ?>>High</option>
+                                                </select>
+                                            </td>
+                                            <td><?php echo htmlspecialchars($notification['created_at']); ?></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger delete-notification"
+                                                    data-notification-id="<?php echo $notification['id']; ?>">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -429,6 +484,23 @@ $messages = $admin->getAllMessages();
                     const content = $(this).find('td:eq(2)').text().toLowerCase();
 
                     if (id.includes(searchText) || username.includes(searchText) || content.includes(searchText)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            $('#notificationSearch').on('keyup', function () {
+                const searchText = $(this).val().toLowerCase();
+                $('#notifications tbody tr').each(function () {
+                    const id = $(this).find('td:eq(0)').text().toLowerCase();
+                    const username = $(this).find('td:eq(1)').text().toLowerCase();
+                    const title = $(this).find('td:eq(2)').text().toLowerCase();
+                    const message = $(this).find('td:eq(3)').text().toLowerCase();
+
+                    if (id.includes(searchText) || username.includes(searchText) || 
+                        title.includes(searchText) || message.includes(searchText)) {
                         $(this).show();
                     } else {
                         $(this).hide();
@@ -546,6 +618,31 @@ $messages = $admin->getAllMessages();
                 }
             });
 
+            // Delete notification
+            $('.delete-notification').click(function () {
+                if (confirm('Are you sure you want to delete this notification?')) {
+                    const notificationId = $(this).data('notification-id');
+                    const $row = $(this).closest('tr');
+
+                    $.post('/pfe/api/admin/delete_notification.php', {
+                        notification_id: notificationId
+                    })
+                        .done(function (response) {
+                            if (response.success) {
+                                $row.fadeOut(400, function () {
+                                    $(this).remove();
+                                });
+                                showToast('Success', 'Notification deleted successfully', 'success');
+                            } else {
+                                showToast('Error', 'Failed to delete notification', 'danger');
+                            }
+                        })
+                        .fail(function () {
+                            showToast('Error', 'Failed to delete notification', 'danger');
+                        });
+                }
+            });
+
             // Editable fields
             $('.editable').click(function () {
                 const currentValue = $(this).text().trim();
@@ -580,12 +677,81 @@ $messages = $admin->getAllMessages();
                     const newValue = fieldType === 'textarea' ?
                         $parent.find('textarea').val() :
                         $parent.find('input').val();
-
-                    // AJAX call to update the value would go here
-                    // For now, just update the display
-                    $parent.html(newValue);
-
-                    showToast('Success', `${fieldName} updated successfully`, 'success');
+                    
+                    const id = $parent.data('id');
+                    const field = $parent.data('field');
+                    
+                    // Determine the endpoint based on the parent element's context
+                    let endpoint = '';
+                    let idField = '';
+                    
+                    if ($parent.closest('#notifications').length) {
+                        endpoint = '/pfe/api/admin/update_notification.php';
+                        idField = 'notification_id';
+                    } else if ($parent.closest('#tasks').length) {
+                        // Handle task updates
+                        $parent.html(newValue);
+                        showToast('Success', `${fieldName} updated successfully`, 'success');
+                        return;
+                    } else {
+                        // Handle other updates
+                        $parent.html(newValue);
+                        showToast('Success', `${fieldName} updated successfully`, 'success');
+                        return;
+                    }
+                    
+                    // Prepare data for AJAX call
+                    const data = {
+                        [idField]: id
+                    };
+                    data[field] = newValue;
+                    
+                    // Make AJAX call to update the value
+                    $.post(endpoint, data)
+                        .done(function(response) {
+                            if (response.success) {
+                                $parent.html(newValue);
+                                showToast('Success', `${fieldName} updated successfully`, 'success');
+                            } else {
+                                $parent.html(currentValue);
+                                showToast('Error', response.error || `Failed to update ${fieldName}`, 'danger');
+                            }
+                        })
+                        .fail(function() {
+                            $parent.html(currentValue);
+                            showToast('Error', `Failed to update ${fieldName}`, 'danger');
+                        });
+                });
+            });
+            
+            // Type and priority select change handlers for notifications
+            $('.type-select, .priority-select').change(function() {
+                const $select = $(this);
+                const notificationId = $select.data('id');
+                const field = $select.hasClass('type-select') ? 'type' : 'priority';
+                const newValue = $select.val();
+                
+                // Disable select while updating
+                $select.prop('disabled', true);
+                
+                $.post('/pfe/api/admin/update_notification.php', {
+                    notification_id: notificationId,
+                    [field]: newValue
+                })
+                .done(function(response) {
+                    if (response.success) {
+                        showToast('Success', `Notification ${field} updated successfully`, 'success');
+                    } else {
+                        // Revert to previous value on error
+                        showToast('Error', response.error || `Failed to update ${field}`, 'danger');
+                    }
+                })
+                .fail(function() {
+                    showToast('Error', `Failed to update ${field}`, 'danger');
+                })
+                .always(function() {
+                    // Re-enable the select
+                    $select.prop('disabled', false);
                 });
             });
 

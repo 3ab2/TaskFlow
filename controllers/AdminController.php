@@ -155,10 +155,29 @@ class AdminController {
             $stmt = $this->db->prepare("SELECT title FROM tasks WHERE id = ?");
             $stmt->execute([$taskId]);
             $task = $stmt->fetch();
+            
+            // Check if task exists
+            if (!$task) {
+                $this->db->rollBack();
+                error_log("Error deleting task: Task with ID $taskId not found");
+                return false;
+            }
 
-            // Delete subtasks
-            $stmt = $this->db->prepare("DELETE FROM subtasks WHERE task_id = ?");
-            $stmt->execute([$taskId]);
+            // Check if subtasks table exists
+            try {
+                $stmt = $this->db->prepare("SHOW TABLES LIKE 'subtasks'");
+                $stmt->execute();
+                $subtasksTableExists = $stmt->rowCount() > 0;
+                
+                // Only try to delete subtasks if the table exists
+                if ($subtasksTableExists) {
+                    $stmt = $this->db->prepare("DELETE FROM subtasks WHERE task_id = ?");
+                    $stmt->execute([$taskId]);
+                }
+            } catch (Exception $e) {
+                // If there's an error checking for the subtasks table, log it but continue
+                error_log("Error checking for subtasks table: " . $e->getMessage());
+            }
 
             // Delete main task
             $stmt = $this->db->prepare("DELETE FROM tasks WHERE id = ?");
@@ -729,6 +748,113 @@ class AdminController {
             'stats' => $stats,
             'advice' => $advice
         ];
+    }
+
+    /**
+     * Delete a notification
+     * 
+     * @param int $notificationId The ID of the notification to delete
+     * @return bool True if the notification was deleted successfully, false otherwise
+     */
+    public function deleteNotification($notificationId) {
+        if (!$this->isAdmin()) {
+            return ['error' => 'Unauthorized access'];
+        }
+        
+        try {
+            $stmt = $this->db->prepare("SELECT id, title FROM notifications WHERE id = ?");
+            $stmt->execute([$notificationId]);
+            $notification = $stmt->fetch();
+            
+            if (!$notification) {
+                return ['error' => 'Notification not found'];
+            }
+            
+            $stmt = $this->db->prepare("DELETE FROM notifications WHERE id = ?");
+            $result = $stmt->execute([$notificationId]);
+            
+            if ($result) {
+                $this->logActivity(
+                    'Notification Delete',
+                    "Deleted notification: {$notification['title']}"
+                );
+                return ['success' => true];
+            } else {
+                return ['error' => 'Failed to delete notification'];
+            }
+        } catch (PDOException $e) {
+            error_log("Error deleting notification: " . $e->getMessage());
+            return ['error' => 'Database error while deleting notification'];
+        }
+    }
+
+    /**
+     * Update a notification
+     * 
+     * @param int $notificationId The ID of the notification to update
+     * @param array $data The data to update (title, message, type, priority)
+     * @return array Result of the update operation
+     */
+    public function updateNotification($notificationId, $data) {
+        if (!$this->isAdmin()) {
+            return ['error' => 'Unauthorized access'];
+        }
+        
+        try {
+            $stmt = $this->db->prepare("SELECT id FROM notifications WHERE id = ?");
+            $stmt->execute([$notificationId]);
+            $notification = $stmt->fetch();
+            
+            if (!$notification) {
+                return ['error' => 'Notification not found'];
+            }
+            
+            $updateFields = [];
+            $params = [];
+            
+            if (isset($data['title'])) {
+                $updateFields[] = "title = ?";
+                $params[] = $data['title'];
+            }
+            
+            if (isset($data['message'])) {
+                $updateFields[] = "message = ?";
+                $params[] = $data['message'];
+            }
+            
+            if (isset($data['type']) && in_array($data['type'], ['info', 'success', 'warning', 'error'])) {
+                $updateFields[] = "type = ?";
+                $params[] = $data['type'];
+            }
+            
+            if (isset($data['priority']) && in_array($data['priority'], ['low', 'normal', 'high'])) {
+                $updateFields[] = "priority = ?";
+                $params[] = $data['priority'];
+            }
+            
+            if (empty($updateFields)) {
+                return ['error' => 'No valid fields to update'];
+            }
+            
+            $params[] = $notificationId;
+            
+            $sql = "UPDATE notifications SET " . implode(", ", $updateFields) . " WHERE id = ?";
+            $stmt = $this->db->prepare($sql);
+            $result = $stmt->execute($params);
+            
+            if ($result) {
+                $this->logActivity(
+                    'Notification Update',
+                    "Updated notification ID: {$notificationId}"
+                );
+                return ['success' => true];
+            } else {
+                return ['error' => 'Failed to update notification'];
+            }
+        } catch (PDOException $e) {
+            error_log("Error updating notification: " . $e->getMessage());
+            return ['error' => 'Database error while updating notification'];
+        }
     }
 }
 
