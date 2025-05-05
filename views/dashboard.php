@@ -78,7 +78,7 @@ $stats = $statsResult['success'] ? $statsResult['data'] : [];
 
     <!-- Tableau Kanban -->
 
-    <div class="row mx-3">
+    <div class="row mx-3 mt-0">
         <div class="col-md-4 tache-a-faire">
             <div style="background: rgba(206, 12, 12, 0.3); border-radius: 10px; padding: 10px; text-align: center; margin-bottom:-10px;">
                 <h5 style="display: inline-block; margin:0 auto;"><i class="fas fa-list" style="color:red;"></i> &nbsp; À faire</h5>

@@ -205,7 +205,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
                         <a class="nav-link position-relative" href="/pfe/views/messages.php">
-                            <i class="fas fa-comments"></i> Feedback
+                            <i class="fas fa-comments"></i> Chat 
                             <?php
                             require_once __DIR__ . '/../controllers/MessageController.php';
                             $messageController = new MessageController();
@@ -289,11 +289,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <i class="fas fa-cog me-2"></i> Paramètres
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="/pfe/views/pricing.php">
-                                    <i class="fas fa-crown me-2"></i> Upgrade
-                                </a>
-                            </li>
+                           
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

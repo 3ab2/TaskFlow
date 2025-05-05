@@ -166,7 +166,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         <li><a href="/pfe/views/dashboard.php">Tableau de bord</a></li>
 
                         <li><a href="/pfe/FAQ.php">FAQ</a></li>
-                        <li><a href="#">Support</a></li>
+                        <li><a href="/pfe/support.php">Support</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 footer-section">

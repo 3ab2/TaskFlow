@@ -198,8 +198,8 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include '../includes/navbar.php'; ?>
 
     <div class="container"  style="margin-top: 100px;" >
-        <h2 class="text-center mb-4" style="font-family: 'Courier New', Courier, monospace;"> Feedback</h2>
-        <p class="text-center mb-4" >Bienvenue dans votre espace de Feedback, où vous pouvez échanger des messages avec vos collègues et collaborateurs.</p>
+        <h2 class="text-center mb-4" style="font-family: 'Courier New', Courier, monospace;"> Chat</h2>
+        <p class="text-center mb-4" >Bienvenue dans votre espace de Messagerie, où vous pouvez échanger des messages avec vos collègues et collaborateurs.</p>
 
 
         <div class="card">
