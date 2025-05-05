@@ -172,8 +172,8 @@ if (session_status() === PHP_SESSION_NONE) {
                 <div class="logo-glow"></div>
             </div>
             <div class="brand-text">
-                <span class="task" style="font-family: 'Edu VIC WA NT Hand Arrows', cursive; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-image: linear-gradient(135deg, #ff7f50 0%,rgb(255, 247, 0) 100%);">Task</span>
-                <span class="flow" style="font-family: 'Edu VIC WA NT Hand Arrows', cursive;">Flow</span>
+                <span class="task" style="font-family: 'Cascadia Code', sans-serif; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-image: linear-gradient(135deg, #ff7f50 0%,rgb(255, 247, 0) 100%);">Task</span>
+                <span class="flow" style="font-family: 'Cascadia Code', sans-serif;">Flow</span>
             </div>
         </a>
 
@@ -205,7 +205,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
                         <a class="nav-link position-relative" href="/pfe/views/messages.php">
-                            <i class="fas fa-comments"></i> Feedback
+                            <i class="fas fa-comments"></i> Chat 
                             <?php
                             require_once __DIR__ . '/../controllers/MessageController.php';
                             $messageController = new MessageController();
@@ -289,11 +289,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <i class="fas fa-cog me-2"></i> Paramètres
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="/pfe/views/pricing.php">
-                                    <i class="fas fa-crown me-2"></i> Upgrade
-                                </a>
-                            </li>
+                           
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

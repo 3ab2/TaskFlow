@@ -167,21 +167,12 @@ $current_year = date('Y');
                 </ul>
             </div>
             <div class="col-md-4 footer-section">
-                <h5>Statistiques</h5>
-                <div class="footer-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">150+</div>
-                        <div class="stat-label">Utilisateurs</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">500+</div>
-                        <div class="stat-label">Tâches</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">98%</div>
-                        <div class="stat-label">Satisfaction</div>
-                    </div>
-                </div>
+                <h5>Contact</h5>
+                <ul class="footer-links">
+                <li><i class="fas fa-map-marker-alt me-2"></i> Centre d'instruction des transmissions,kenitra </li>
+                    <li><i class="fas fa-envelope me-2"></i> admintaskflow@gmail.com</li>             
+                    <li><i class="fas fa-phone me-2"></i> +212 589 123 456</li>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">

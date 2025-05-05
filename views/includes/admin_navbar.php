@@ -172,28 +172,28 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <a class="nav-link <?php echo $current_page === 'add_user.php' ? 'active' : ''; ?>"
                         href="/pfe/views/admin/add_user.php">
                         <i class="fas fa-user-plus"></i>
-                        <span>Ajouter Utilisateur</span>
+                        <span>Add User</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current_page === 'add_task.php' ? 'active' : ''; ?>"
                         href="/pfe/views/admin/add_task.php">
                         <i class="fas fa-plus-circle"></i>
-                        <span>Nouvelle Tâche</span>
+                        <span>Add Task</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current_page === 'send_notification.php' ? 'active' : ''; ?>"
                         href="/pfe/views/admin/send_notification.php">
                         <i class="fas fa-bell"></i>
-                        <span>Envoyer Notification</span>
+                        <span>Send Notification</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo $current_page === 'statistics.php' ? 'active' : ''; ?>"
                         href="/pfe/views/admin/statistics.php">
                         <i class="fas fa-chart-bar"></i>
-                        <span>Statistiques</span>
+                        <span>statistics</span>
                     </a>
                 </li>
             </ul>

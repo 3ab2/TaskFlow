@@ -35,103 +35,18 @@ if (!$user) {
     exit();
 }
 
-// Récupération des tâches assignées à l'utilisateur
-$query = "SELECT id, title, description, status, priority, due_date, deadline, created_at 
-          FROM tasks 
-          WHERE assigned_to = :user_id 
-          ORDER BY due_date ASC";
-$stmt = $pdo->prepare($query);
-$stmt->bindParam(':user_id', $profile_user_id);
-$stmt->execute();
-$tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Calcul du pourcentage de progression pour chaque statut de tâche
-$task_count = count($tasks);
-$completed_count = 0;
-$in_progress_count = 0;
-$to_do_count = 0;
-
-foreach ($tasks as $task) {
-    if ($task['status'] == 'completed') {
-        $completed_count++;
-    } elseif ($task['status'] == 'in_progress') {
-        $in_progress_count++;
-    } elseif ($task['status'] == 'to_do') {
-        $to_do_count++;
-    }
-}
-
-$completed_percentage = $task_count > 0 ? round(($completed_count / $task_count) * 100) : 0;
-$in_progress_percentage = $task_count > 0 ? round(($in_progress_count / $task_count) * 100) : 0;
-$to_do_percentage = $task_count > 0 ? round(($to_do_count / $task_count) * 100) : 0;
-
-// Fonction pour convertir le statut en texte français
-function getStatusLabel($status) {
-    switch ($status) {
-        case 'to_do':
-            return 'À faire';
-        case 'in_progress':
-            return 'En cours';
-        case 'completed':
-            return 'Terminée';
-        default:
-            return $status;
-    }
-}
-
-// Fonction pour convertir la priorité en texte français
-function getPriorityLabel($priority) {
-    switch ($priority) {
-        case 'low':
-            return 'Basse';
-        case 'medium':
-            return 'Moyenne';
-        case 'high':
-            return 'Haute';
-        default:
-            return $priority;
-    }
-}
-
-// Fonction pour obtenir la classe de couleur selon la priorité
-function getPriorityClass($priority) {
-    switch ($priority) {
-        case 'low':
-            return 'text-success';
-        case 'medium':
-            return 'text-warning';
-        case 'high':
-            return 'text-danger';
-        default:
-            return '';
-    }
-}
-
-// Fonction pour obtenir la classe de couleur selon le statut
-function getStatusClass($status) {
-    switch ($status) {
-        case 'to_do':
-            return 'bg-danger';
-        case 'in_progress':
-            return 'bg-warning';
-        case 'completed':
-            return 'bg-success';
-        default:
-            return 'bg-secondary';
-    }
-}
 
 // Fonction pour obtenir la classe d'icône selon le statut utilisateur
 function getStatusIcon($status) {
     switch ($status) {
         case 'available':
-            return '<i class="fas fa-circle text-success" title="Disponible"></i>';
+            return '<i class="fas fa-circle text-success" title="' . __('Disponible') . '"></i>';
         case 'busy':
-            return '<i class="fas fa-circle text-danger" title="Occupé"></i>';
+            return '<i class="fas fa-circle text-danger" title="' . __('Occupé') . '"></i>';
         case 'away':
-            return '<i class="fas fa-circle text-warning" title="Absent"></i>';
+            return '<i class="fas fa-circle text-warning" title="' . __('Absent') . '"></i>';
         default:
-            return '<i class="fas fa-circle text-secondary" title="Inconnu"></i>';
+            return '<i class="fas fa-circle text-secondary" title="' . __('Inconnu') . '"></i>';
     }
 }
 
@@ -142,13 +57,13 @@ $interval = $created_date->diff($now);
 $account_age = '';
 
 if ($interval->y > 0) {
-    $account_age = $interval->y . ' an' . ($interval->y > 1 ? 's' : '') . ' ';
+    $account_age = $interval->y . ' ' . ($interval->y > 1 ? __('ans') : __('an')) . ' ';
 }
 if ($interval->m > 0) {
-    $account_age .= $interval->m . ' mois ';
+    $account_age .= $interval->m . ' ' . __('mois') . ' ';
 }
 if ($interval->d > 0 && $interval->y == 0) {
-    $account_age .= $interval->d . ' jour' . ($interval->d > 1 ? 's' : '') . ' ';
+    $account_age .= $interval->d . ' ' . ($interval->d > 1 ? __('jours') : __('jour')) . ' ';
 }
 ?>
 
@@ -316,6 +231,16 @@ if ($interval->d > 0 && $interval->y == 0) {
                             <i class="fas fa-paper-plane me-2"></i>Envoyer un message
                         </a>
                     <?php endif; ?>
+                    <?php if ($current_user_id == $profile_user_id): ?>
+                            <div class="mt-4">
+                                <a href="profile.php" class="btn btn-primary w-100">
+                                    <i class="fas fa-user-edit me-2"></i>Modifier mon profil
+                                </a>
+                                <a href="messages.php?receiver=<?= $user['id'] ?>" class="btn btn-message">
+                            <i class="fas fa-paper-plane me-2"></i>Envoyer un message
+                        </a>
+                            </div>
+                        <?php endif; ?>
                 </div>
             </div>
             <div class="flex-grow-1">
@@ -349,134 +274,8 @@ if ($interval->d > 0 && $interval->y == 0) {
         </div>
 
         <div class="row">
-            <div class="col-md-8">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h4><i class="fas fa-tasks me-2"></i>Tâches assignées (<?= count($tasks) ?>)</h4>
-                    </div>
-                    <div class="card-body">
-                        <?php if (count($tasks) > 0): ?>
-                            <div class="task-progress-container">
-                                <div class="progress-label">
-                                    <span>Terminées</span>
-                                    <span><?= $completed_percentage ?>%</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: <?= $completed_percentage ?>%" aria-valuenow="<?= $completed_percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                
-                                <div class="progress-label mt-3">
-                                    <span>En cours</span>
-                                    <span><?= $in_progress_percentage ?>%</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $in_progress_percentage ?>%" aria-valuenow="<?= $in_progress_percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                
-                                <div class="progress-label mt-3">
-                                    <span>À faire</span>
-                                    <span><?= $to_do_percentage ?>%</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?= $to_do_percentage ?>%" aria-valuenow="<?= $to_do_percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-4">
-                                <h5>Liste des tâches</h5>
-                                <?php foreach ($tasks as $task): ?>
-                                    <div class="task-item priority-<?= $task['priority'] ?>">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h6 class="mb-0"><?= htmlspecialchars($task['title']) ?></h6>
-                                            <span class="badge <?= getStatusClass($task['status']) ?>"><?= getStatusLabel($task['status']) ?></span>
-                                        </div>
-                                        
-                                        <p class="text-muted small mb-2">
-                                            <i class="fas fa-calendar-alt me-1"></i> Échéance: 
-                                            <?= $task['due_date'] ? date('d/m/Y', strtotime($task['due_date'])) : 'Non définie' ?>
-                                        </p>
-                                        
-                                        <p class="text-muted small mb-0">
-                                            <i class="fas fa-flag me-1 <?= getPriorityClass($task['priority']) ?>"></i> 
-                                            Priorité: <?= getPriorityLabel($task['priority']) ?>
-                                        </p>
-                                        
-                                        <?php if ($task['description']): ?>
-                                            <div class="mt-2">
-                                                <p class="mb-0 small"><?= nl2br(htmlspecialchars($task['description'])) ?></p>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php else: ?>
-                            <div class="no-tasks-message">
-                                <i class="fas fa-tasks fa-3x mb-3 text-muted"></i>
-                                <p>Aucune tâche n'est actuellement assignée à cet utilisateur.</p>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h4><i class="fas fa-user me-2"></i>À propos</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="about-section">
-                            <h5 class="mb-3">Informations générales</h5>
-                            <div class="user-info-item">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Performance: <?= $completed_percentage ?>% de tâches terminées</span>
-                            </div>
-                            <div class="user-info-item">
-                                <i class="fas fa-clipboard-list"></i>
-                                <span><?= $task_count ?> tâches attribuées</span>
-                            </div>
-                            <div class="user-info-item">
-                                <i class="fas fa-clock"></i>
-                                <span><?= $in_progress_count ?> tâches en cours</span>
-                            </div>
-                            <div class="user-info-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span><?= $completed_count ?> tâches terminées</span>
-                            </div>
-                            <div class="user-info-item">
-                                <i class="fas fa-times-circle"></i>
-                                <span><?= $to_do_count ?> tâches à faire</span>
-                            </div>
-                        </div>
-
-                        <?php if ($current_user_id == $profile_user_id): ?>
-                            <div class="mt-4">
-                                <a href="profile.php" class="btn btn-primary w-100">
-                                    <i class="fas fa-user-edit me-2"></i>Modifier mon profil
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <?php if ($user['role'] == 'admin'): ?>
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h4><i class="fas fa-shield-alt me-2"></i>Informations administratives</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="user-info-item">
-                            <i class="fas fa-star"></i>
-                            <span>Niveau d'administration: <?= $user['admin_level'] ?></span>
-                        </div>
-                        <div class="user-info-item">
-                            <i class="fas fa-users-cog"></i>
-                            <span>Rôle: Administrateur</span>
-                        </div>
-                    </div>
-                </div>
-                <?php endif; ?>
-            </div>
+           
         </div>
     </div>
 

@@ -1,7 +1,29 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 24 avr. 2025 à 11:08
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
 -- Base de données : `task_management`
 --
 
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `admin_activity`
 --
 
@@ -13,11 +35,7 @@ CREATE TABLE `admin_activity` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `admin_activity`
---
-
- --------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `messages`
@@ -34,8 +52,8 @@ CREATE TABLE `messages` (
   `last_read` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- 
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `message_reads`
 --
@@ -46,12 +64,12 @@ CREATE TABLE `message_reads` (
   `last_read` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
------------------------------------------------------
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `message_read_logs`
---
+
 
 CREATE TABLE `message_read_logs` (
   `id` int(11) NOT NULL,
@@ -59,11 +77,11 @@ CREATE TABLE `message_read_logs` (
   `read_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--
---
+-- --------------------------------------------------------
+
+
 -- Structure de la table `message_recipients`
---
+
 
 CREATE TABLE `message_recipients` (
   `id` int(11) NOT NULL,
@@ -74,12 +92,10 @@ CREATE TABLE `message_recipients` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--
+-- --------------------------------------------------------
 
---
 -- Structure de la table `notifications`
---
+
 
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL,
@@ -93,8 +109,8 @@ CREATE TABLE `notifications` (
   `is_read` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `notification_recipients`
 --
@@ -121,32 +137,28 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
----------------------------------------------------------
-
 -- --------------------------------------------------------
 
 --
--- Structure de la table `subscriptions`
+-- Structure de la table `projects`
 --
 
-CREATE TABLE `subscriptions` (
+CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `plan` varchar(50) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
-  `stripe_subscription_id` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `project_name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
---
 -- Structure de la table `support_requests`
 --
 
 CREATE TABLE `support_requests` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `subject` varchar(255) NOT NULL,
@@ -155,11 +167,8 @@ CREATE TABLE `support_requests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
---
---
 -- Structure de la table `tasks`
 --
-
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
@@ -178,24 +187,8 @@ CREATE TABLE `tasks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
---
-
---
--- Structure de la table `projects`
---
-
-CREATE TABLE `projects` (
-  `id` int(11) NOT NULL,
-  `project_name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
 -- Structure de la table `users`
 --
-
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -215,8 +208,6 @@ CREATE TABLE `users` (
   `plan` enum('free','premium') DEFAULT 'free'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--
 -- --------------------------------------------------------
 
 --
@@ -228,6 +219,21 @@ CREATE TABLE `user_preferences` (
   `theme` enum('light','dark') DEFAULT 'light',
   `notifications_enabled` tinyint(1) DEFAULT 1,
   `language` enum('fr','en','ar') DEFAULT 'fr',
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_settings`
+--
+
+CREATE TABLE `user_settings` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `settings_type` varchar(50) NOT NULL,
+  `settings_data` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -312,7 +318,8 @@ ALTER TABLE `subscriptions`
 -- Index pour la table `support_requests`
 --
 ALTER TABLE `support_requests`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_support_requests_user` (`user_id`);
 
 --
 -- Index pour la table `tasks`
@@ -335,6 +342,13 @@ ALTER TABLE `user_preferences`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Index pour la table `user_settings`
+--
+ALTER TABLE `user_settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_user_setting` (`user_id`,`settings_type`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -342,19 +356,19 @@ ALTER TABLE `user_preferences`
 -- AUTO_INCREMENT pour la table `admin_activity`
 --
 ALTER TABLE `admin_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=283;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=296;
 
 --
 -- AUTO_INCREMENT pour la table `message_reads`
 --
 ALTER TABLE `message_reads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
 
 --
 -- AUTO_INCREMENT pour la table `message_read_logs`
@@ -372,7 +386,7 @@ ALTER TABLE `message_recipients`
 -- AUTO_INCREMENT pour la table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT pour la table `notification_recipients`
@@ -384,7 +398,7 @@ ALTER TABLE `notification_recipients`
 -- AUTO_INCREMENT pour la table `password_resets`
 --
 ALTER TABLE `password_resets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `projects`
@@ -402,19 +416,25 @@ ALTER TABLE `subscriptions`
 -- AUTO_INCREMENT pour la table `support_requests`
 --
 ALTER TABLE `support_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT pour la table `user_settings`
+--
+ALTER TABLE `user_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
@@ -473,10 +493,23 @@ ALTER TABLE `subscriptions`
   ADD CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Contraintes pour la table `support_requests`
+--
+ALTER TABLE `support_requests`
+  ADD CONSTRAINT `fk_support_requests_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_support_requests_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
 -- Contraintes pour la table `user_preferences`
 --
 ALTER TABLE `user_preferences`
   ADD CONSTRAINT `user_preferences_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `user_settings`
+--
+ALTER TABLE `user_settings`
+  ADD CONSTRAINT `user_settings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
