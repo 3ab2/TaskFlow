@@ -1,6 +1,8 @@
 <?php
 session_start();
+require_once '../includes/lang.php';
 require_once "../config/database.php";
+
 
 // Vérification si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
@@ -232,13 +234,15 @@ if ($interval->d > 0 && $interval->y == 0) {
                         </a>
                     <?php endif; ?>
                     <?php if ($current_user_id == $profile_user_id): ?>
-                            <div class="mt-4">
-                                <a href="profile.php" class="btn btn-primary w-100">
+                            <div class="mt-4 mb-3">
+                                <a href="profile.php" class="btn btn-primary w-100 d-block">
                                     <i class="fas fa-user-edit me-2"></i>Modifier mon profil
                                 </a>
-                                <a href="messages.php?receiver=<?= $user['id'] ?>" class="btn btn-message">
-                            <i class="fas fa-paper-plane me-2"></i>Envoyer un message
-                        </a>
+                            </div>
+                            <div>
+                                <a href="messages.php?receiver=<?= $user['id'] ?>" class="btn btn-message w-100 d-block">
+                                    <i class="fas fa-paper-plane me-2"></i>Envoyer un message
+                                </a>
                             </div>
                         <?php endif; ?>
                 </div>
