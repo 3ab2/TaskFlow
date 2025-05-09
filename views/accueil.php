@@ -64,6 +64,37 @@
         </div>
     </div>
 
+    <!-- Why Choose Us Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Pourquoi nous choisir ?</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-3 col-sm-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card p-4 text-center shadow-sm h-100">
+                    <i class="fas fa-dollar-sign fa-3x text-primary mb-3"></i>
+                    <h5>100% gratuit ou tarif abordable</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card p-4 text-center shadow-sm h-100">
+                    <i class="fas fa-tachometer-alt fa-3x text-success mb-3"></i>
+                    <h5>Interface simple et intuitive</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card p-4 text-center shadow-sm h-100">
+                    <i class="fas fa-headset fa-3x text-danger mb-3"></i>
+                    <h5>Support technique réactif</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="card p-4 text-center shadow-sm h-100">
+                    <i class="fas fa-shield-alt fa-3x text-warning mb-3"></i>
+                    <h5>Plateforme sécurisée</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- User Testimonials Section -->
     <section class="container my-5">
         <h2 class="text-center mb-4">Témoignages d'utilisateurs</h2>
@@ -155,187 +186,12 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="container my-5">
-        <h2 class="text-center mb-4">Foire Aux Questions</h2>
-<div class="container my-4">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" id="faqSearch" placeholder="Rechercher une question...">
-        <button class="btn btn-outline-secondary" type="button" onclick="searchFAQ()">Rechercher</button>
-    </div>
-</div>
-
-<script>
-    function searchFAQ() {
-        const query = document.getElementById('faqSearch').value.toLowerCase();
-        const items = document.querySelectorAll('.accordion-item');
-        items.forEach(item => {
-            const question = item.querySelector('.accordion-button').innerText.toLowerCase();
-            if (question.includes(query)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-</script>
-
-        <div class="accordion" id="faqAccordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">Comment ajouter une tâche ?</button>
-                </h2>
-                <div id="faq1" class="accordion-collapse collapse show">
-                    <div class="accordion-body">Allez dans le tableau de bord et cliquez sur "Nouvelle tâche".</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Comment contacter un utilisateur ?</button>
-                </h2>
-                <div id="faq2" class="accordion-collapse collapse">
-                    <div class="accordion-body">Utilisez la messagerie pour envoyer un message direct.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">Comment modifier une tâche ?</button>
-                </h2>
-                <div id="faq3" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Modifier" sur la tâche que vous souhaitez modifier.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">Comment supprimer une tâche ?</button>
-                </h2>
-                <div id="faq4" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Supprimer" sur la tâche que vous souhaitez supprimer.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">Comment ajouter un utilisateur ?</button>
-                </h2>
-                <div id="faq5" class="accordion-collapse collapse">
-                    <div class="accordion-body">Allez dans la section "Utilisateurs" et cliquez sur "Nouvel utilisateur".</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">Comment modifier un utilisateur ?</button>
-                </h2>
-                <div id="faq6" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Modifier" sur l'utilisateur que vous souhaitez modifier.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">Comment supprimer un utilisateur ?</button>
-                </h2>
-                <div id="faq7" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Supprimer" sur l'utilisateur que vous souhaitez supprimer.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq8">Comment créer un groupe ?</button>
-                </h2>
-                <div id="faq8" class="accordion-collapse collapse">
-                    <div class="accordion-body">Allez dans la section "Groupes" et cliquez sur "Nouveau groupe".</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq9">Comment modifier un groupe ?</button>
-                </h2>
-                <div id="faq9" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Modifier" sur le groupe que vous souhaitez modifier.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq10">Comment supprimer un groupe ?</button>
-                </h2>
-                <div id="faq10" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Supprimer" sur le groupe que vous souhaitez supprimer.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq11">Comment ajouter un utilisateur à un groupe ?</button>
-                </h2>
-                <div id="faq11" class="accordion-collapse collapse">
-                    <div class="accordion-body">Allez dans la section "Groupes" et cliquez sur le bouton "Ajouter un utilisateur" sur le groupe que vous souhaitez modifier.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq12">Comment modifier un utilisateur dans un groupe ?</button>
-                </h2>
-                <div id="faq12" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Modifier" sur l'utilisateur que vous souhaitez modifier dans le groupe.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq13">Comment supprimer un utilisateur d'un groupe ?</button>
-                </h2>
-                <div id="faq13" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Supprimer" sur l'utilisateur que vous souhaitez supprimer du groupe.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq14">Comment créer une tâche dans un groupe ?</button>
-                </h2>
-                <div id="faq14" class="accordion-collapse collapse">
-                    <div class="accordion-body">Allez dans la section "Groupes" et cliquez sur le bouton "Nouvelle tâche" sur le groupe que vous souhaitez modifier.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq15">Comment modifier une tâche dans un groupe ?</button>
-                </h2>
-                <div id="faq15" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Modifier" sur la tâche que vous souhaitez modifier dans le groupe.</div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq16">Comment supprimer une tâche dans un groupe ?</button>
-                </h2>
-                <div id="faq16" class="accordion-collapse collapse">
-                    <div class="accordion-body">Cliquez sur le bouton "Supprimer" sur la tâche que vous souhaitez supprimer du groupe.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Scroll to Top Button -->
-    <button onclick="topFunction()" id="scrollTop" class="btn btn-primary position-fixed" style="bottom: 20px; right: 20px; display: none;">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
+   
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
-
-        // Bouton de retour en haut
-        window.onscroll = function() {
-            let btn = document.getElementById("scrollTop");
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                btn.style.display = "block";
-            } else {
-                btn.style.display = "none";
-            }
-        };
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
     </script>
       <!-- Footer -->
       <footer style="margin-top: 20px;">
