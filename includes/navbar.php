@@ -198,7 +198,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/pfe/views/statistiques.php">
-                            <i class="fas fa-chart-line "></i></i> Statistiques
+                            <i class="fas fa-chart-line "></i> Statistiques
                         </a>
                     </li>
                 <?php endif; ?>
@@ -307,7 +307,6 @@ if (session_status() === PHP_SESSION_NONE) {
        
     </div>
 </nav>
-
 
 
 

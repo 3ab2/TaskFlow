@@ -1,8 +1,6 @@
 <?php
-session_start();
 require_once '../includes/lang.php';
 require_once "../config/database.php";
-
 
 // Vérification si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {

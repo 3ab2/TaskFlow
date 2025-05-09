@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result['success']) {
         $success = $result['message'];
-        header('refresh:3;url=login.php');
+        header('refresh:1.5;url=login.php');
     } else {
         $error = implode('<br>', $result['errors']);
     }

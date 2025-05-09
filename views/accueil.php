@@ -18,15 +18,16 @@
     <?php include "../includes/navbar.php"; ?>
 
     <!-- Hero Section -->
-    <section class="hero text-center text-white py-5 mt-5" style="background: linear-gradient(135deg, rgba(72, 38, 174, 0.82), #2c3e50);">
+    <section class="hero text-center text-white py-5" style="background: linear-gradient(135deg, rgba(72, 38, 174, 0.82),rgb(115, 97, 174));">
         <div class="container">
-            <h1 class="display-4">Optimisez votre productivité avec TaskFlow</h1>
-            <p class="lead">Gérez vos tâches efficacement et collaborez en toute simplicité.</p>
+            <h1 class="display-4 " style="margin-top: 130px;">Optimisez votre productivité avec TaskFlow</h1>
+            <p class="lead">Gérez vos tâches efficacement en les organisant par projet et en définissant des échéances. Collaborez en toute simplicité en partageant vos tâches avec vos collègues et en suivant leur progression en temps réel.</p>
             <div class="alert" data-aos="fade-up" data-aos-delay="300">
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg mt-3">Commencer maintenant</a>
                 <?php else: ?>
                     <a href="/pfe/views/statistiques.php" class="btn btn-light btn-lg mt-3">Voir vos statistiques</a>
+                    <a href="/pfe/views/dashboard.php" class="btn btn-light btn-lg mt-3">Aller au Tableau de bord</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -62,6 +63,97 @@
             </div>
         </div>
     </div>
+
+    <!-- User Testimonials Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Témoignages d'utilisateurs</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card p-3 shadow-sm text-center">
+                    <img src="/pfe/assets/images/profile.png" alt="Utilisateur 1" class="rounded-circle mx-auto d-block" style="width: 80px; height: 80px; object-fit: cover;">
+                    <h5 class="mt-3">Samir Laafi</h5>
+                    <p class="fst-italic">"TaskFlow m’a permis de mieux organiser mon travail quotidien."</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card p-3 shadow-sm text-center">
+                    <img src="/pfe/assets/images/profile_12.jpg" alt="Utilisateur 2" class="rounded-circle mx-auto d-block" style="width: 80px; height: 80px; object-fit: cover;">
+                    <h5 class="mt-3">3AB2U </h5>
+                    <p class="fst-italic">"Une application intuitive qui a transformé ma gestion de tâches."</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card p-3 shadow-sm text-center">
+                    <img src="/pfe/uploads/profile/680c0e57047ec.jpeg" alt="Utilisateur 3" class="rounded-circle mx-auto d-block" style="width: 80px; height: 80px; object-fit: cover;">
+                    <h5 class="mt-3">Ahmed Benali</h5>
+                    <p class="fst-italic">"Grâce à TaskFlow, je collabore mieux avec mon équipe."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Interface Preview Section -->
+    <section class="container-fluid my-5">
+        <h2 class="text-center mb-4">Aperçu de l’interface</h2>
+        <div class="row justify-content-center">
+            <div class="col-10 text-center">
+                
+                <!-- Optional video demo -->
+            
+                <video width="100%" autoplay loop muted class="mt-3 rounded shadow-sm" data-aos="fade-up">
+                    <source src="/pfe/assets/images/demo.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
+                
+            </div>
+        </div>
+    </section>
+
+
+
+      <!-- Security and Privacy Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Sécurité et Confidentialité</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card p-5 shadow-sm">
+                    <h4 class="mb-3"><i class="fas fa-lock text-primary me-2"></i>Authentification Sécurisée</h4>
+                    <p>Notre plateforme utilise une authentification sécurisée pour garantir que vos informations restent protégées. Nous employons des protocoles de sécurité avancés pour prévenir tout accès non autorisé.</p>
+                </div>
+                <div class="card p-5 shadow-sm mt-4">
+                    <h4 class="mb-3"><i class="fas fa-user-shield text-primary me-2"></i>Respect de la Vie Privée</h4>
+                    <p>Nous nous engageons à respecter votre vie privée. Vos données personnelles ne seront jamais partagées sans votre consentement explicite, et nous adhérons aux normes les plus strictes de protection des données.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Multi-Device Compatibility Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Compatibilité multi-supports</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-6 col-12 p-3">
+                <div class="d-flex flex-column align-items-center">
+                    <i class="fas fa-desktop text-primary" title="Ordinateur" style="font-size: 5rem;"></i>
+                    <p class="fs-1 mt-2">Ordinateur</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-12 p-3">
+                <div class="d-flex flex-column align-items-center">
+                    <i class="fas fa-tablet-alt text-primary" title="Tablette" style="font-size: 5rem;"></i>
+                    <p class="fs-1 mt-2">Tablette</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-12 p-3">
+                <div class="d-flex flex-column align-items-center">
+                    <i class="fas fa-mobile-alt text-primary" title="Mobile" style="font-size: 5rem;"></i>
+                    <p class="fs-1 mt-2">Mobile</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- FAQ Section -->
     <section class="container my-5">

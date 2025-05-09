@@ -15,10 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $auth->getUserByEmail($email);
         if ($user && $user['role'] === 'admin') {
             header('Location: /pfe/views/admin/dashboard.php');
+            exit();
         } else {
-            header('Location: /pfe/views/dashboard.php');
+            // Redirect to loading.php with target redirect to accueil.php
+            header('Location: /pfe/views/loading.php?redirect=/pfe/views/accueil.php');
+            exit();
         }
-        exit();
     } else {
         $_SESSION['error'] = implode('<br>', $result['errors']);
         header('Location: /pfe/views/auth/login.php');
@@ -28,3 +30,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: /pfe/views/auth/login.php');
     exit();
 }
+?>
