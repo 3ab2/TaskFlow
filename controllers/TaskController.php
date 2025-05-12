@@ -79,7 +79,7 @@ class TaskController
                 $stmt->execute([$_SESSION['user_id']]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if ($result['count'] >= 10) {
+                if ($result['count'] >= 100) {
                     return [
                         'success' => false,
                         'message' => 'Vous ne pouvez pas avoir plus de 10 tâches en cours'
@@ -135,13 +135,13 @@ class TaskController
                 ];
             }
 
-            // Vérifier la limite de 3 tâches en cours
+            // Vérifier la limite de 100 tâches en cours
             if (isset($data['status']) && $data['status'] === 'in_progress' && $task['status'] !== 'in_progress') {
                 $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM {$this->table} WHERE user_id = ? AND status = 'in_progress'");
                 $stmt->execute([$_SESSION['user_id']]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if ($result['count'] >= 1000000000000) {
+                if ($result['count'] >= 100) {
                     return [
                         'success' => false,
                         'message' => 'Vous ne pouvez pas avoir plus de 100000000000 tâches en cours'

@@ -18,7 +18,7 @@
     <?php include "../includes/navbar.php"; ?>
 
     <!-- Hero Section -->
-    <section class="hero text-center text-white py-5" style="background: linear-gradient(135deg, rgba(72, 38, 174, 0.82),rgb(115, 97, 174));">
+    <section class="hero text-center text-white py-5" style=" background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
         <div class="container">
             <h1 class="display-4 " style="margin-top: 130px;">Optimisez votre productivité avec TaskFlow</h1>
             <p class="lead">Gérez vos tâches efficacement en les organisant par projet et en définissant des échéances. Collaborez en toute simplicité en partageant vos tâches avec vos collègues et en suivant leur progression en temps réel.</p>
@@ -26,7 +26,7 @@
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <a href="/pfe/views/auth/register.php" class="btn btn-light btn-lg mt-3">Commencer maintenant</a>
                 <?php else: ?>
-                    <a href="/pfe/views/statistiques.php" class="btn btn-light btn-lg mt-3">Voir vos statistiques</a>
+                    <a href="/pfe/views/statistiques.php" class="btn btn-light btn-lg mt-3 me-5">Aller aux statistiques</a>
                     <a href="/pfe/views/dashboard.php" class="btn btn-light btn-lg mt-3">Aller au Tableau de bord</a>
                 <?php endif; ?>
             </div>

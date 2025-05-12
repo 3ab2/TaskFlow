@@ -26,6 +26,8 @@ $notifications = $admin->getAllNotifications();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="/pfe/assets/css/taskflow-custom.css" rel="stylesheet">
+    <link href="/pfe/assets/css/admin-responsive.css" rel="stylesheet">
+    <link href="/pfe/assets/css/admin-task-status.css" rel="stylesheet">
     <?php include '../includes/admin_style.php'; ?>
 
     <style>
@@ -39,10 +41,22 @@ $notifications = $admin->getAllNotifications();
             padding: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             margin-bottom: 20px;
+            overflow-x: auto; /* Allow horizontal scroll on small screens */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        ul.nav-tabs::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        ul.nav-tabs::-webkit-scrollbar-thumb {
+            background-color: rgba(67, 97, 238, 0.3);
+            border-radius: 3px;
         }
 
         ul.nav-tabs li.nav-item {
             margin-right: 10px;
+            flex: 0 0 auto; /* Prevent shrinking */
         }
 
         ul.nav-tabs li.nav-item a.nav-link {
@@ -52,6 +66,7 @@ $notifications = $admin->getAllNotifications();
             padding: 10px 20px;
             transition: all 0.3s ease;
             font-weight: 600;
+            white-space: nowrap; /* Prevent text wrap */
         }
 
         ul.nav-tabs li.nav-item a.nav-link.active {
@@ -72,7 +87,7 @@ $notifications = $admin->getAllNotifications();
             font-weight: 600;
         }
 
-        .status-pending {
+        .status-to_do {
             background-color: rgba(249, 199, 79, 0.2);
             color: #d1a429;
         }
@@ -132,6 +147,47 @@ $notifications = $admin->getAllNotifications();
 
         #adminTabs {
             background-color: rgba(255, 255, 255, 0.0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            ul.nav-tabs li.nav-item a.nav-link {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .table thead th, .table tbody td {
+                padding: 6px 8px;
+                font-size: 0.85rem;
+            }
+
+            .btn-action {
+                width: 28px;
+                height: 28px;
+                margin-right: 3px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            ul.nav-tabs li.nav-item a.nav-link {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+
+            .table thead th, .table tbody td {
+                padding: 4px 6px;
+                font-size: 0.8rem;
+            }
+
+            .btn-action {
+                width: 24px;
+                height: 24px;
+                margin-right: 2px;
+            }
+
+            .card-header {
+                padding: 0.5rem 1rem;
+            }
         }
     </style>
 </head>
@@ -293,7 +349,7 @@ $notifications = $admin->getAllNotifications();
                                             <td>
                                                 <select class="form-select form-select-sm status-select"
                                                     data-id="<?php echo $task['id']; ?>">
-                                                    <option value="pending" <?php echo $task['status'] === 'pending' ? 'selected' : ''; ?>>Pending</option>
+                                                    <option value="to_do" <?php echo $task['status'] === 'to_do' ? 'selected' : ''; ?>>to do</option>
                                                     <option value="in_progress" <?php echo $task['status'] === 'in_progress' ? 'selected' : ''; ?>>In Progress</option>
                                                     <option value="completed" <?php echo $task['status'] === 'completed' ? 'selected' : ''; ?>>Completed</option>
                                                 </select>
@@ -790,6 +846,7 @@ $notifications = $admin->getAllNotifications();
             }
         });
     </script>
+    <script src="/pfe/assets/js/admin-task-status.js"></script>
 </body>
 
 </html>

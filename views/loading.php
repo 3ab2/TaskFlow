@@ -136,8 +136,8 @@ $redirectUrl = isset($_GET['redirect']) ? $_GET['redirect'] : '/pfe/views/accuei
         // Redirect after a short delay
         setTimeout(function() {
             window.location.href = "<?php echo $redirectUrl; ?>";
-        }, 5000); // 3 second delay before redirecting
-    </script>
+        }, 2000); //2 second delay before redirecting
+    </script> 
 </body>
 
 </html>

@@ -24,6 +24,7 @@ $preferences = $admin->getAdminPreferences();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="/pfe/assets/css/taskflow-custom.css" rel="stylesheet">
+    <link href="/pfe/assets/css/admin-responsive.css" rel="stylesheet">
     <?php include '../includes/admin_style.php'; ?>
 </head>
 
@@ -45,7 +46,7 @@ $preferences = $admin->getAdminPreferences();
                                 data-bs-toggle="list">
                                 <i class="fas fa-history me-2"></i>Historique
                             </a>
-                           
+
                             <a href="/pfe/controllers/logout.php"
                                 class="list-group-item list-group-item-action text-danger">
                                 <i class="fas fa-sign-out-alt me-2"></i>Déconnexion

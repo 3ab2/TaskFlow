@@ -405,6 +405,8 @@ class AdminController {
         }
     }
 
+    
+
     public function updateAdminPreferences($data) {
         if (!$this->isAdmin()) {
             return ['error' => 'Unauthorized access'];
@@ -486,7 +488,7 @@ class AdminController {
                     COUNT(*) as total,
                     COUNT(CASE WHEN status = 'completed' THEN 1 END) as completed,
                     COUNT(CASE WHEN status = 'in_progress' THEN 1 END) as in_progress,
-                    COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending,
+                    COUNT(CASE WHEN status = 'to_do' THEN 1 END) as to_do,
                     COUNT(CASE WHEN created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) THEN 1 END) as new_tasks
                     FROM tasks";
             
@@ -510,7 +512,7 @@ class AdminController {
                 'total' => $result['total'],
                 'completed' => $result['completed'],
                 'in_progress' => $result['in_progress'],
-                'pending' => $result['pending'],
+                'to_do' => $result['to_do'],
                 'new_tasks' => $result['new_tasks'],
                 'growth' => $growth
             ];
@@ -520,7 +522,7 @@ class AdminController {
                 'total' => 0,
                 'completed' => 0,
                 'in_progress' => 0,
-                'pending' => 0,
+                'to_do' => 0,
                 'new_tasks' => 0,
                 'growth' => 0
             ];
